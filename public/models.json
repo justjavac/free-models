@@ -1,0 +1,537 @@
+{
+  "openai/gpt-4o": {
+    "id": "openai/gpt-4o",
+    "name": "GPT-4o",
+    "provider": "openai",
+    "description": "OpenAI 多模态旗舰，文本/图像/音频统一推理。",
+    "modalities": {
+      "input": [
+        "text",
+        "image",
+        "audio"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2024-05-13",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "openrouter",
+      "aiionly",
+      "302ai",
+      "requesty",
+      "aiproxy"
+    ]
+  },
+  "openai/gpt-4o-mini": {
+    "id": "openai/gpt-4o-mini",
+    "name": "GPT-4o mini",
+    "provider": "openai",
+    "description": "高性价比小模型，适合大规模高频调用。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2024-07-18",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "iflow"
+    ]
+  },
+  "openai/gpt-4.1": {
+    "id": "openai/gpt-4.1",
+    "name": "GPT-4.1",
+    "provider": "openai",
+    "description": "面向 agent 与长上下文优化的模型。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 1000000,
+    "reasoning": false,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2025-04-14",
+    "available_on": [
+      "anyrouter"
+    ]
+  },
+  "anthropic/claude-sonnet-4": {
+    "id": "anthropic/claude-sonnet-4",
+    "name": "Claude Sonnet 4",
+    "provider": "anthropic",
+    "description": "均衡的智能与速度，coding / agent 主力。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 200000,
+    "reasoning": true,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2025-05-22",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "openrouter",
+      "aiionly",
+      "302ai",
+      "requesty",
+      "aiproxy"
+    ]
+  },
+  "anthropic/claude-opus-4": {
+    "id": "anthropic/claude-opus-4",
+    "name": "Claude Opus 4",
+    "provider": "anthropic",
+    "description": "Anthropic 最强推理与复杂任务模型。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 200000,
+    "reasoning": true,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2025-05-22",
+    "available_on": [
+      "anyrouter",
+      "agentrouter"
+    ]
+  },
+  "anthropic/claude-3.5-haiku": {
+    "id": "anthropic/claude-3.5-haiku",
+    "name": "Claude 3.5 Haiku",
+    "provider": "anthropic",
+    "description": "低成本高速模型，适合轻量任务。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 200000,
+    "reasoning": false,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2024-11-04",
+    "available_on": [
+      "anyrouter"
+    ]
+  },
+  "google/gemini-2.5-flash": {
+    "id": "google/gemini-2.5-flash",
+    "name": "Gemini 2.5 Flash",
+    "provider": "google",
+    "description": "高速低成本多模态模型，支持长上下文。",
+    "modalities": {
+      "input": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 1000000,
+    "reasoning": true,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2025-04-09",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "openrouter",
+      "aiionly",
+      "302ai"
+    ]
+  },
+  "google/gemini-2.5-pro": {
+    "id": "google/gemini-2.5-pro",
+    "name": "Gemini 2.5 Pro",
+    "provider": "google",
+    "description": "Google 旗舰多模态推理模型。",
+    "modalities": {
+      "input": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 1000000,
+    "reasoning": true,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2025-03-25",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "requesty"
+    ]
+  },
+  "deepseek/deepseek-chat": {
+    "id": "deepseek/deepseek-chat",
+    "name": "DeepSeek Chat (V3)",
+    "provider": "deepseek",
+    "description": "开源 MoE 通用模型，中文与代码能力强。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "structured_output": true,
+    "open_weights": true,
+    "release_date": "2024-12-26",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "openrouter",
+      "siliconflow",
+      "ppio",
+      "aiionly",
+      "iflow",
+      "modelscope",
+      "xiaomi-mimo",
+      "nvidia-mim",
+      "302ai",
+      "requesty",
+      "aiproxy",
+      "hunyuan",
+      "volcengine"
+    ]
+  },
+  "deepseek/deepseek-reasoner": {
+    "id": "deepseek/deepseek-reasoner",
+    "name": "DeepSeek Reasoner (R1)",
+    "provider": "deepseek",
+    "description": "开源推理模型，擅长数学与代码。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 64000,
+    "reasoning": true,
+    "tool_call": true,
+    "open_weights": true,
+    "release_date": "2025-01-20",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "siliconflow",
+      "ppio"
+    ]
+  },
+  "qwen/qwen-max": {
+    "id": "qwen/qwen-max",
+    "name": "Qwen Max",
+    "provider": "qwen",
+    "description": "通义千问旗舰模型，中文综合能力领先。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 32768,
+    "reasoning": true,
+    "tool_call": true,
+    "structured_output": true,
+    "release_date": "2024-09-19",
+    "available_on": [
+      "anyrouter",
+      "agentrouter",
+      "openrouter",
+      "siliconflow",
+      "ppio",
+      "aiionly",
+      "iflow",
+      "modelscope",
+      "xiaomi-mimo",
+      "302ai",
+      "aiproxy",
+      "hunyuan",
+      "volcengine"
+    ]
+  },
+  "qwen/qwen-plus": {
+    "id": "qwen/qwen-plus",
+    "name": "Qwen Plus",
+    "provider": "qwen",
+    "description": "均衡性价比的通义千问模型。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 131072,
+    "reasoning": false,
+    "tool_call": true,
+    "release_date": "2024-09-19",
+    "available_on": []
+  },
+  "qwen/qwen2.5-72b-instruct": {
+    "id": "qwen/qwen2.5-72b-instruct",
+    "name": "Qwen2.5-72B Instruct",
+    "provider": "qwen",
+    "description": "开源 720 亿参数指令模型。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "open_weights": true,
+    "release_date": "2024-09-19",
+    "available_on": [
+      "siliconflow",
+      "modelscope"
+    ]
+  },
+  "zhipu/glm-4-plus": {
+    "id": "zhipu/glm-4-plus",
+    "name": "GLM-4 Plus",
+    "provider": "zhipu",
+    "description": "智谱 GLM 旗舰模型。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": true,
+    "tool_call": true,
+    "release_date": "2024-08-20",
+    "available_on": [
+      "agentrouter",
+      "iflow",
+      "nvidia-mim"
+    ]
+  },
+  "zhipu/glm-4-flash": {
+    "id": "zhipu/glm-4-flash",
+    "name": "GLM-4 Flash",
+    "provider": "zhipu",
+    "description": "免费高速的 GLM 模型。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "release_date": "2024-08-20",
+    "available_on": [
+      "siliconflow",
+      "modelscope"
+    ]
+  },
+  "moonshot/kimi-k2": {
+    "id": "moonshot/kimi-k2",
+    "name": "Kimi K2",
+    "provider": "moonshot",
+    "description": "月之暗面开源 MoE 大模型，agent 能力强。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 256000,
+    "reasoning": true,
+    "tool_call": true,
+    "open_weights": true,
+    "release_date": "2025-07-11",
+    "available_on": [
+      "siliconflow"
+    ]
+  },
+  "xai/grok-2": {
+    "id": "xai/grok-2",
+    "name": "Grok 2",
+    "provider": "xai",
+    "description": "xAI 多模态模型，支持实时信息。",
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "release_date": "2024-08-13",
+    "available_on": [
+      "anyrouter",
+      "openrouter"
+    ]
+  },
+  "meta/llama-3.1-70b": {
+    "id": "meta/llama-3.1-70b",
+    "name": "Llama 3.1 70B",
+    "provider": "meta",
+    "description": "Meta 开源 700 亿参数多语言模型。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "open_weights": true,
+    "release_date": "2024-07-23",
+    "available_on": [
+      "anyrouter",
+      "openrouter",
+      "siliconflow",
+      "ppio",
+      "modelscope",
+      "nvidia-mim"
+    ]
+  },
+  "meta/llama-3.1-8b": {
+    "id": "meta/llama-3.1-8b",
+    "name": "Llama 3.1 8B",
+    "provider": "meta",
+    "description": "轻量开源模型，适合边缘与高频场景。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "open_weights": true,
+    "release_date": "2024-07-23",
+    "available_on": [
+      "siliconflow"
+    ]
+  },
+  "mistral/mistral-large": {
+    "id": "mistral/mistral-large",
+    "name": "Mistral Large",
+    "provider": "mistral",
+    "description": "Mistral 旗舰闭源模型。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "release_date": "2024-02-26",
+    "available_on": [
+      "anyrouter",
+      "openrouter"
+    ]
+  },
+  "minimax/abab6.5": {
+    "id": "minimax/abab6.5",
+    "name": "MiniMax ABAB6.5",
+    "provider": "minimax",
+    "description": "MiniMax 通用大模型。",
+    "modalities": {
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ]
+    },
+    "context": 128000,
+    "reasoning": false,
+    "tool_call": true,
+    "release_date": "2024-09-01",
+    "available_on": [
+      "siliconflow",
+      "ppio",
+      "nvidia-mim"
+    ]
+  }
+}
