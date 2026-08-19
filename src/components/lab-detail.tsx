@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Copy, Check, CheckCircle2, Minus } from "lucide-react";
-import type { CatalogJson, Model } from "@/lib/types";
+import type { Model } from "@/lib/types";
 import { useApp } from "@/components/providers";
 import { Button } from "@/components/ui/button";
 import { monogramStyle, initial } from "@/lib/visual";
@@ -13,11 +13,9 @@ import { formatTokens } from "@/lib/format";
 export function LabDetail({
   provider,
   models,
-  catalog,
 }: {
   provider: string;
   models: Model[];
-  catalog: CatalogJson;
 }) {
   const { t } = useApp();
   const [copied, setCopied] = useState<string | null>(null);

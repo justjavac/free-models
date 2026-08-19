@@ -8,9 +8,13 @@ import type { CatalogJson, Model } from "@/lib/types";
 import { useApp } from "@/components/providers";
 import { Input } from "@/components/ui/input";
 import { formatTokens } from "@/lib/format";
-import type { DictKey } from "@/lib/i18n";
 
 type SortKey = "latest" | "name" | "context";
+
+function readQuery(key: string): string {
+  if (typeof window === "undefined") return "";
+  return new URLSearchParams(window.location.search).get(key) ?? "";
+}
 
 function sortModels(list: Model[], sort: SortKey): Model[] {
   const arr = [...list];
@@ -36,18 +40,13 @@ export function ModelsExplorer({ catalog }: { catalog: CatalogJson }) {
   const { t } = useApp();
   const models = useMemo(() => Object.values(catalog.models), [catalog]);
 
-  const [q, setQ] = useState("");
-  const [provider, setProvider] = useState("");
+  const [q, setQ] = useState<string>(() => readQuery("q"));
+  const [provider, setProvider] = useState<string>(() => readQuery("provider"));
   const [sort, setSort] = useState<SortKey>("latest");
   const [copied, setCopied] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // 初始化与 URL 同步（?q= &provider=）
-  useEffect(() => {
-    const p = new URLSearchParams(window.location.search);
-    if (p.get("q")) setQ(p.get("q")!);
-    if (p.get("provider")) setProvider(p.get("provider")!);
-  }, []);
+  // URL 同步（仅写回浏览器历史，不做状态初始化）
   useEffect(() => {
     const params = new URLSearchParams();
     if (q) params.set("q", q);

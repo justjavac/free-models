@@ -166,7 +166,7 @@ const { text } = await generateText({
               </tr>
             </thead>
             <tbody>
-              {Object.entries(relay.models).map(([id, ref]) => {
+              {Object.entries(relay.models).map(([id]) => {
                 const m = catalog.models[id];
                 return (
                   <tr key={id} className="border-t border-border">

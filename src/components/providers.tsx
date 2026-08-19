@@ -22,31 +22,47 @@ interface AppCtx {
 
 const Ctx = createContext<AppCtx | null>(null);
 
-export function AppProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("zh");
-  const [theme, setTheme] = useState<Theme>("dark");
+function readStorage<T extends string>(key: string, fallback: T): T {
+  if (typeof window === "undefined") return fallback;
+  try {
+    return (localStorage.getItem(key) as T) || fallback;
+  } catch {
+    return fallback;
+  }
+}
 
-  // 挂载后从 localStorage 恢复偏好
+export function AppProvider({ children }: { children: ReactNode }) {
+  // 惰性初始化读取偏好（SSR 时返回默认值，避免 effect 内 setState）
+  const [locale, setLocaleState] = useState<Locale>(() =>
+    readStorage("locale", "zh" as Locale),
+  );
+  const [theme, setThemeState] = useState<Theme>(() =>
+    readStorage("theme", "dark" as Theme),
+  );
+
+  // 与 <html> 同步（layout 的防闪烁脚本已处理首帧，这里跟随后续切换）
   useEffect(() => {
-    const savedLocale = (localStorage.getItem("locale") as Locale) || "zh";
-    const savedTheme = (localStorage.getItem("theme") as Theme) || "dark";
-    setLocaleState(savedLocale);
-    setTheme(savedTheme);
-    document.documentElement.lang = savedLocale;
-    document.documentElement.classList.toggle("dark", savedTheme === "dark");
-  }, []);
+    document.documentElement.lang = locale;
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [locale, theme]);
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);
-    localStorage.setItem("locale", l);
-    document.documentElement.lang = l;
+    try {
+      localStorage.setItem("locale", l);
+    } catch {
+      /* 忽略 */
+    }
   };
   const toggleLocale = () => setLocale(locale === "zh" ? "en" : "zh");
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-    document.documentElement.classList.toggle("dark", next === "dark");
+    setThemeState(next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* 忽略 */
+    }
   };
 
   const t = (key: DictKey, vars?: Record<string, string | number>) =>

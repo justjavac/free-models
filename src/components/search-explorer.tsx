@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
-import { Search, X, ExternalLink, Check } from "lucide-react";
+import { Search, X, Check } from "lucide-react";
 import type { CatalogJson, FreeQuotaType, Region, Relay, RelayStatus } from "@/lib/types";
 import { useApp } from "@/components/providers";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -29,6 +29,11 @@ const STATUS_DOT: Record<RelayStatus, string> = {
 
 type FreeType = FreeQuotaType;
 type Status = RelayStatus;
+
+function readQuery(key: string): string {
+  if (typeof window === "undefined") return "";
+  return new URLSearchParams(window.location.search).get(key) ?? "";
+}
 
 function RelayCard({ relay }: { relay: Relay }) {
   const { t, locale } = useApp();
@@ -136,7 +141,7 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
     [relays],
   );
 
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState<string>(() => readQuery("q"));
   const searchRef = useRef<HTMLInputElement>(null);
   const [freeTypes, setFreeTypes] = useState<Set<string>>(new Set());
   const [regions, setRegions] = useState<Set<string>>(new Set());
@@ -144,11 +149,7 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
   const [statuses, setStatuses] = useState<Set<string>>(new Set());
   const [openaiOnly, setOpenaiOnly] = useState(false);
 
-  // URL 同步（?q=）
-  useEffect(() => {
-    const p = new URLSearchParams(window.location.search).get("q");
-    if (p) setQ(p);
-  }, []);
+  // URL 同步（仅写回浏览器历史，不做状态初始化）
   useEffect(() => {
     const url = q ? `?q=${encodeURIComponent(q)}` : window.location.pathname;
     window.history.replaceState(null, "", url);
@@ -201,7 +202,11 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
 
   const toggle = (set: Set<string>, val: string) => {
     const next = new Set(set);
-    next.has(val) ? next.delete(val) : next.add(val);
+    if (next.has(val)) {
+      next.delete(val);
+    } else {
+      next.add(val);
+    }
     return next;
   };
 

@@ -32,7 +32,7 @@ export default async function LabPage({ params }: { params: Promise<{ id: string
   if (models.length === 0) notFound();
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
-      <LabDetail provider={id} models={models} catalog={catalog} />
+      <LabDetail provider={id} models={models} />
     </main>
   );
 }
