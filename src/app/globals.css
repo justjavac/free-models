@@ -94,3 +94,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.4);
 }
+
+/* 交互元素 hover 显示小手（部分浏览器 button 默认是箭头光标） */
+a,
+button,
+summary,
+[role="button"],
+[role="option"] {
+  cursor: pointer;
+}

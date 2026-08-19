@@ -7,5 +7,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${base}/relay/${r.id}`,
     lastModified: r.updated_at,
   }));
-  return [{ url: base, lastModified: new Date().toISOString() }, ...relays];
+  return [
+    { url: base, lastModified: new Date().toISOString() },
+    { url: `${base}/providers`, lastModified: new Date().toISOString() },
+    { url: `${base}/about`, lastModified: new Date().toISOString() },
+    ...relays,
+  ];
 }
