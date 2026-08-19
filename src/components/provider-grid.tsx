@@ -29,7 +29,7 @@ export function ProviderGrid({ catalog }: { catalog: CatalogJson }) {
         {providers.map(([name, count]) => (
           <Link
             key={name}
-            href={`/?provider=${encodeURIComponent(name)}`}
+            href={`/labs/${name}`}
             className="group flex items-center gap-3 rounded-xl border border-border bg-card/50 p-3 transition-colors hover:border-foreground/30"
           >
             <span

@@ -218,15 +218,14 @@ export function ModelsExplorer({ catalog }: { catalog: CatalogJson }) {
                     <div className="truncate text-xs text-muted-foreground">{m.id}</div>
                   </div>
 
-                  {/* 厂商（链接到筛选） */}
+                  {/* 厂商（链接到 labs 页） */}
                   <div className="hidden text-sm capitalize text-muted-foreground md:block">
-                    <button
-                      type="button"
-                      onClick={() => setProvider(m.provider)}
+                    <Link
+                      href={`/labs/${m.provider}`}
                       className="hover:text-foreground hover:underline"
                     >
                       {m.provider}
-                    </button>
+                    </Link>
                   </div>
 
                   {/* 上下文 */}

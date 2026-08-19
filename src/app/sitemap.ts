@@ -11,11 +11,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${base}/models/${id}`,
     lastModified: new Date().toISOString(),
   }));
+  const labs = Array.from(
+    new Set(Object.values(getCatalog().models).map((m) => m.provider)),
+  ).map((id) => ({
+    url: `${base}/labs/${id}`,
+    lastModified: new Date().toISOString(),
+  }));
   return [
     { url: base, lastModified: new Date().toISOString() },
     { url: `${base}/providers`, lastModified: new Date().toISOString() },
     { url: `${base}/about`, lastModified: new Date().toISOString() },
     ...relays,
     ...models,
+    ...labs,
   ];
 }
