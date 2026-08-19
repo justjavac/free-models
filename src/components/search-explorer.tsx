@@ -6,7 +6,6 @@ import Fuse from "fuse.js";
 import { Search, X, Check } from "lucide-react";
 import type { CatalogJson, FreeQuotaType, Region, Relay, RelayStatus } from "@/lib/types";
 import { useApp } from "@/components/providers";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,24 +39,27 @@ function readSet(key: string): Set<string> {
   return new Set(v ? v.split(",").filter(Boolean) : []);
 }
 
-function RelayCard({ relay }: { relay: Relay }) {
+/** 中转站列表行：重点突出免费额度与说明 */
+function RelayRow({ relay }: { relay: Relay }) {
   const { t, locale } = useApp();
   const fq = relay.free_quota;
   const fType = fq.type as FreeType | undefined;
-  const providers = relay.providers.slice(0, 4);
+  const providers = relay.providers.slice(0, 3);
   const extra = relay.providers.length - providers.length;
+  const note = fq.notes ?? relay.pricing.notes;
 
   return (
-    <Card className="group flex flex-col transition-all hover:border-foreground/30 hover:shadow-md">
-      <CardHeader className="flex-row items-start gap-3 space-y-0">
+    <li className="grid grid-cols-1 gap-3 px-4 py-3 transition-colors hover:bg-accent/40 md:grid-cols-[1.1fr_1.4fr_1.6fr_0.9fr_0.55fr_0.9fr] md:items-center md:gap-4">
+      {/* 中转站 */}
+      <div className="flex min-w-0 items-center gap-3">
         <span
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-base font-bold text-white"
           style={monogramStyle(relay.id)}
         >
           {initial(relay.name)}
         </span>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5">
             <Link
               href={`/relay/${relay.id}`}
               className="truncate font-semibold hover:underline"
@@ -69,58 +71,59 @@ function RelayCard({ relay }: { relay: Relay }) {
               title={t(`status.${relay.status}` as DictKey)}
             />
           </div>
-          <p className="mt-0.5 truncate text-xs text-muted-foreground">
+          <div className="truncate text-xs text-muted-foreground">
             {relay.url.replace(/^https?:\/\//, "")}
-          </p>
+          </div>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="flex flex-1 flex-col gap-3">
+      {/* 免费额度（重点突出） */}
+      <div className="rounded-lg bg-emerald-500/5 px-3 py-2 ring-1 ring-emerald-500/10">
         {fq.available && fType && (
-          <Badge variant={FREE_VARIANT[fType]} className="w-fit">
+          <Badge variant={FREE_VARIANT[fType]} className="mb-1">
             {t(`free.${fType}` as DictKey)}
           </Badge>
         )}
-        <p className="line-clamp-2 text-sm text-muted-foreground">
+        <div className="text-sm font-semibold leading-snug text-foreground">
           {fq.amount ?? (locale === "zh" ? "查看详情" : "See details")}
-        </p>
-
-        <div className="mt-auto flex flex-wrap items-center gap-1.5">
-          <Badge variant="secondary">{t("card.models", { n: relay.model_count })}</Badge>
-          {relay.openai_compatible && (
-            <Badge variant="info">OpenAI</Badge>
-          )}
-          {relay.region.includes("cn") && (
-            <Badge variant="outline">{t("region.cn")}</Badge>
-          )}
         </div>
+      </div>
 
-        <div className="flex flex-wrap gap-1">
-          {providers.map((p) => (
-            <span
-              key={p}
-              className="rounded bg-secondary px-1.5 py-0.5 text-xs capitalize text-secondary-foreground"
-            >
-              {p}
-            </span>
-          ))}
-          {extra > 0 && (
-            <span className="px-1 py-0.5 text-xs text-muted-foreground">+{extra}</span>
-          )}
-        </div>
+      {/* 说明 */}
+      <div className="text-sm text-muted-foreground">
+        <p className="line-clamp-2">{note ?? "—"}</p>
+      </div>
 
-        <div className="flex gap-2 pt-1">
-          <Button asChild size="sm" className="flex-1">
-            <Link href={`/relay/${relay.id}`}>{t("card.viewDetail")}</Link>
-          </Button>
-          <Button asChild size="sm" variant="outline">
-            <a href={relay.auth.signup} target="_blank" rel="noreferrer">
-              {t("card.signup")}
-            </a>
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+      {/* 支持厂商 */}
+      <div className="flex flex-wrap gap-1">
+        {providers.map((p) => (
+          <span
+            key={p}
+            className="rounded bg-secondary px-1.5 py-0.5 text-xs capitalize text-secondary-foreground"
+          >
+            {p}
+          </span>
+        ))}
+        {extra > 0 && (
+          <span className="px-1 py-0.5 text-xs text-muted-foreground">+{extra}</span>
+        )}
+      </div>
+
+      {/* 模型数 */}
+      <div className="hidden text-sm text-muted-foreground md:block">{relay.model_count}</div>
+
+      {/* 操作 */}
+      <div className="flex gap-2">
+        <Button asChild size="sm" className="flex-1">
+          <Link href={`/relay/${relay.id}`}>{t("card.viewDetail")}</Link>
+        </Button>
+        <Button asChild size="sm" variant="outline">
+          <a href={relay.auth.signup} target="_blank" rel="noreferrer">
+            {t("card.signup")}
+          </a>
+        </Button>
+      </div>
+    </li>
   );
 }
 
@@ -333,16 +336,26 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
       {/* 结果计数 */}
       <p className="text-sm text-muted-foreground">{t("home.results", { n: results.length })}</p>
 
-      {/* 网格 */}
+      {/* 列表 */}
       {results.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border py-16 text-center text-muted-foreground">
           {t("home.results", { n: 0 })}
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {results.map((r) => (
-            <RelayCard key={r.id} relay={r} />
-          ))}
+        <div className="overflow-hidden rounded-xl border border-border">
+          <div className="hidden border-b border-border bg-card/60 px-4 py-2 text-xs font-medium text-muted-foreground md:grid md:grid-cols-[1.1fr_1.4fr_1.6fr_0.9fr_0.55fr_0.9fr] md:gap-4">
+            <span>{t("providers.relays")}</span>
+            <span>{t("card.free")}</span>
+            <span>{t("providers.notes")}</span>
+            <span>{t("card.providers")}</span>
+            <span>{t("models.title")}</span>
+            <span className="text-right">{t("card.viewDetail")}</span>
+          </div>
+          <ul className="divide-y divide-border">
+            {results.map((r) => (
+              <RelayRow key={r.id} relay={r} />
+            ))}
+          </ul>
         </div>
       )}
     </div>

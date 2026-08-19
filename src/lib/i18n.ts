@@ -123,6 +123,7 @@ export const dictionaries = {
     "providers.labsDesc": "各模型厂商及其收录模型数，点击查看该厂商全部模型",
     "providers.relays": "中转站",
     "providers.relaysDesc": "提供免费额度的 LLM 中转站 / 聚合网关",
+    "providers.notes": "说明",
     "labs.back": "返回供应商页",
   },
   en: {
@@ -245,6 +246,7 @@ export const dictionaries = {
     "providers.labsDesc": "Model providers and their indexed model counts. Click to see all their models.",
     "providers.relays": "Relays",
     "providers.relaysDesc": "LLM relays / gateways offering free quota",
+    "providers.notes": "Notes",
     "labs.back": "Back to providers",
   },
 } as const;
