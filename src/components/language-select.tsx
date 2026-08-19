@@ -32,13 +32,13 @@ export function LanguageSelect() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-9 items-center gap-1.5 rounded-md px-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label="language"
+        title={t(current.labelKey)}
       >
         <Globe className="h-4 w-4" />
-        <span>{current.code === "zh" ? "中文" : "EN"}</span>
       </button>
 
       {open && (

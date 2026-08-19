@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
 import { Search, X, ExternalLink, Check } from "lucide-react";
@@ -137,6 +137,7 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
   );
 
   const [q, setQ] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
   const [freeTypes, setFreeTypes] = useState<Set<string>>(new Set());
   const [regions, setRegions] = useState<Set<string>>(new Set());
   const [providers, setProviders] = useState<Set<string>>(new Set());
@@ -152,6 +153,19 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
     const url = q ? `?q=${encodeURIComponent(q)}` : window.location.pathname;
     window.history.replaceState(null, "", url);
   }, [q]);
+
+  // `/` 快捷键聚焦搜索
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key !== "/") return;
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      e.preventDefault();
+      searchRef.current?.focus();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
 
   const fuse = useMemo(
     () =>
@@ -200,10 +214,11 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
       <div className="relative">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
+          ref={searchRef}
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={t("search.placeholder")}
-          className="h-12 pl-10 pr-10 text-base"
+          className="h-10 pl-10 pr-10 text-base"
         />
         {q && (
           <button
@@ -217,7 +232,7 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
       </div>
 
       {/* 筛选栏 */}
-      <div className="rounded-xl border border-border bg-card/50 p-4 space-y-4">
+      <div className="rounded-xl border border-border bg-card/50 p-3 space-y-2.5">
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium">{t("filters.title")}</span>
           {hasFilters && (
@@ -303,7 +318,7 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
           {t("home.results", { n: 0 })}
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {results.map((r) => (
             <RelayCard key={r.id} relay={r} />
           ))}
