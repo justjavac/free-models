@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "gen": "tsx scripts/generate.ts",
-    "predev": "tsx scripts/generate.ts",
     "dev": "next dev",
-    "build": "tsx scripts/generate.ts && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },

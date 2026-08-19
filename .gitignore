@@ -42,3 +42,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 数据端点由 src/app 路由静态生成，public 下不再跟踪
+/public/api.json
+/public/models.json
+/public/catalog.json
+/public/llms.txt
+/public/llms-full.txt
+/scripts/
