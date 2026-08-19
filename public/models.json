@@ -15,6 +15,11 @@
       ]
     },
     "context": 128000,
+    "max_output": 16384,
+    "price": {
+      "input": 2.5,
+      "output": 10
+    },
     "reasoning": false,
     "tool_call": true,
     "structured_output": true,
@@ -44,6 +49,11 @@
       ]
     },
     "context": 128000,
+    "max_output": 16384,
+    "price": {
+      "input": 0.15,
+      "output": 0.6
+    },
     "reasoning": false,
     "tool_call": true,
     "structured_output": true,
@@ -69,6 +79,11 @@
       ]
     },
     "context": 1000000,
+    "max_output": 32768,
+    "price": {
+      "input": 2,
+      "output": 8
+    },
     "reasoning": false,
     "tool_call": true,
     "structured_output": true,
@@ -92,6 +107,11 @@
       ]
     },
     "context": 200000,
+    "max_output": 64000,
+    "price": {
+      "input": 3,
+      "output": 15
+    },
     "reasoning": true,
     "tool_call": true,
     "structured_output": true,
@@ -121,6 +141,11 @@
       ]
     },
     "context": 200000,
+    "max_output": 64000,
+    "price": {
+      "input": 15,
+      "output": 75
+    },
     "reasoning": true,
     "tool_call": true,
     "structured_output": true,
@@ -145,6 +170,11 @@
       ]
     },
     "context": 200000,
+    "max_output": 8192,
+    "price": {
+      "input": 0.8,
+      "output": 4
+    },
     "reasoning": false,
     "tool_call": true,
     "structured_output": true,
@@ -170,6 +200,11 @@
       ]
     },
     "context": 1000000,
+    "max_output": 65536,
+    "price": {
+      "input": 0.1,
+      "output": 0.4
+    },
     "reasoning": true,
     "tool_call": true,
     "structured_output": true,
@@ -199,6 +234,11 @@
       ]
     },
     "context": 1000000,
+    "max_output": 65536,
+    "price": {
+      "input": 1.25,
+      "output": 10
+    },
     "reasoning": true,
     "tool_call": true,
     "structured_output": true,
@@ -223,6 +263,11 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
+    "price": {
+      "input": 0.27,
+      "output": 1.1
+    },
     "reasoning": false,
     "tool_call": true,
     "structured_output": true,
@@ -260,6 +305,11 @@
       ]
     },
     "context": 64000,
+    "max_output": 8192,
+    "price": {
+      "input": 0.55,
+      "output": 2.19
+    },
     "reasoning": true,
     "tool_call": true,
     "open_weights": true,
@@ -286,6 +336,11 @@
       ]
     },
     "context": 32768,
+    "max_output": 8192,
+    "price": {
+      "input": 1.6,
+      "output": 6.4
+    },
     "reasoning": true,
     "tool_call": true,
     "structured_output": true,
@@ -321,6 +376,11 @@
       ]
     },
     "context": 131072,
+    "max_output": 8192,
+    "price": {
+      "input": 0.8,
+      "output": 2
+    },
     "reasoning": false,
     "tool_call": true,
     "release_date": "2024-09-19",
@@ -340,6 +400,7 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
     "reasoning": false,
     "tool_call": true,
     "open_weights": true,
@@ -364,6 +425,7 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
     "reasoning": true,
     "tool_call": true,
     "release_date": "2024-08-20",
@@ -387,6 +449,11 @@
       ]
     },
     "context": 128000,
+    "max_output": 4096,
+    "price": {
+      "input": 0,
+      "output": 0
+    },
     "reasoning": false,
     "tool_call": true,
     "release_date": "2024-08-20",
@@ -409,6 +476,7 @@
       ]
     },
     "context": 256000,
+    "max_output": 32000,
     "reasoning": true,
     "tool_call": true,
     "open_weights": true,
@@ -432,6 +500,11 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
+    "price": {
+      "input": 2,
+      "output": 10
+    },
     "reasoning": false,
     "tool_call": true,
     "release_date": "2024-08-13",
@@ -454,6 +527,7 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
     "reasoning": false,
     "tool_call": true,
     "open_weights": true,
@@ -481,6 +555,7 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
     "reasoning": false,
     "tool_call": true,
     "open_weights": true,
@@ -503,6 +578,11 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
+    "price": {
+      "input": 2,
+      "output": 6
+    },
     "reasoning": false,
     "tool_call": true,
     "release_date": "2024-02-26",
@@ -525,6 +605,7 @@
       ]
     },
     "context": 128000,
+    "max_output": 8192,
     "reasoning": false,
     "tool_call": true,
     "release_date": "2024-09-01",
