@@ -3,21 +3,14 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
-import { Search, X, Copy, Check, CheckCircle2, Minus, Image as ImageIcon } from "lucide-react";
+import { Search, X, Copy, Check, CheckCircle2, Minus } from "lucide-react";
 import type { CatalogJson, Model } from "@/lib/types";
 import { useApp } from "@/components/providers";
 import { Input } from "@/components/ui/input";
+import { formatTokens } from "@/lib/format";
 import type { DictKey } from "@/lib/i18n";
 
 type SortKey = "latest" | "name" | "context";
-
-// 上下文长度友好格式化：128000 → 128K，8000000 → 8M
-function formatContext(n?: number): string {
-  if (!n) return "—";
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
-  if (n >= 1_000) return `${Math.round(n / 1_000)}K`;
-  return n.toLocaleString();
-}
 
 function sortModels(list: Model[], sort: SortKey): Model[] {
   const arr = [...list];
@@ -194,9 +187,6 @@ export function ModelsExplorer({ catalog }: { catalog: CatalogJson }) {
             {results.map((m) => {
               const shown = m.available_on.slice(0, 3);
               const extra = m.available_on.length - shown.length;
-              const outImage = m.modalities.output.includes("image");
-              const outAudio = m.modalities.output.includes("audio");
-              const outVideo = m.modalities.output.includes("video");
               return (
                 <li
                   key={m.id}
@@ -241,23 +231,12 @@ export function ModelsExplorer({ catalog }: { catalog: CatalogJson }) {
 
                   {/* 上下文 */}
                   <div className="hidden text-sm text-muted-foreground md:block">
-                    {formatContext(m.context)}
+                    {formatTokens(m.context)}
                   </div>
 
-                  {/* 输出模态 */}
-                  <div className="hidden text-sm xl:block">
-                    {outImage || outAudio || outVideo ? (
-                      <span className="inline-flex items-center gap-1 text-xs text-violet-400">
-                        <ImageIcon className="h-3.5 w-3.5" />
-                        {outImage
-                          ? t("models.modalityImage")
-                          : outAudio
-                            ? t("models.modalityAudio")
-                            : t("models.modalityVideo")}
-                      </span>
-                    ) : (
-                      <span className="text-muted-foreground/60">—</span>
-                    )}
+                  {/* 输出长度 */}
+                  <div className="hidden text-sm text-muted-foreground xl:block">
+                    {formatTokens(m.max_output)}
                   </div>
 
                   {/* 推理 */}

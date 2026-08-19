@@ -78,6 +78,9 @@ export interface Model {
   description?: string;
   modalities: { input: string[]; output: string[] };
   context?: number; // 上下文窗口（token）
+  max_output?: number; // 最大输出长度（token）
+  /** 每百万 token 价格（USD），可选 */
+  price?: { input?: number; output?: number };
   reasoning?: boolean;
   tool_call?: boolean;
   structured_output?: boolean;

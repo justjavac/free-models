@@ -124,6 +124,12 @@ export const dictionaries = {
     "models.modalityImage": "图像",
     "models.modalityAudio": "音频",
     "models.modalityVideo": "视频",
+    "models.maxOutput": "输出长度",
+    "detail.price": "价格（$/百万 token）",
+    "providers.labs": "模型厂商",
+    "providers.labsDesc": "各模型厂商及其收录模型数，点击查看该厂商全部模型",
+    "providers.relays": "中转站",
+    "providers.relaysDesc": "提供免费额度的 LLM 中转站 / 聚合网关",
   },
   en: {
     "site.title": "Relay Free-Quota DB",
@@ -246,6 +252,12 @@ export const dictionaries = {
     "models.modalityImage": "Image",
     "models.modalityAudio": "Audio",
     "models.modalityVideo": "Video",
+    "models.maxOutput": "Max output",
+    "detail.price": "Price ($/1M tokens)",
+    "providers.labs": "Model labs",
+    "providers.labsDesc": "Model providers and their indexed model counts. Click to see all their models.",
+    "providers.relays": "Relays",
+    "providers.relaysDesc": "LLM relays / gateways offering free quota",
   },
 } as const;
 

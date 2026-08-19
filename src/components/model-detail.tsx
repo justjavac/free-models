@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { monogramStyle, initial } from "@/lib/visual";
+import { formatTokens } from "@/lib/format";
 import type { DictKey } from "@/lib/i18n";
 
 const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warning"> = {
@@ -18,6 +19,10 @@ const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warni
   free_models: "warning",
   unlimited: "success",
 };
+
+function fmtPrice(n?: number): string {
+  return n === undefined ? "?" : n.toFixed(2);
+}
 
 export function ModelDetail({ model, catalog }: { model: Model; catalog: CatalogJson }) {
   const { t, locale } = useApp();
@@ -103,6 +108,15 @@ export function ModelDetail({ model, catalog }: { model: Model; catalog: Catalog
             yes={model.open_weights}
           />
           <Spec label={t("models.released")} value={model.release_date ?? "—"} />
+          <Spec label={t("models.maxOutput")} value={formatTokens(model.max_output)} />
+          <Spec
+            label={t("detail.price")}
+            value={
+              model.price
+                ? `$${fmtPrice(model.price.input)} / $${fmtPrice(model.price.output)}`
+                : "—"
+            }
+          />
         </CardContent>
       </Card>
 
