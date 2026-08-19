@@ -27,39 +27,6 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
   const { t, locale } = useApp();
   const fq = relay.free_quota;
   const fType = fq.type as FreeQuotaType | undefined;
-  const firstModel = Object.keys(relay.models)[0] ?? "anthropic/claude-sonnet-4";
-
-  const pySnippet = `from openai import OpenAI
-
-client = OpenAI(
-    base_url="${relay.api}",
-    api_key="YOUR_API_KEY",  # ${relay.auth.env.join(", ")}
-)
-
-resp = client.chat.completions.create(
-    model="${firstModel}",
-    messages=[{"role": "user", "content": "Hello"}],
-)
-print(resp.choices[0].message.content)`;
-
-  const curlSnippet = `curl ${relay.api}/chat/completions \\
-  -H "Authorization: Bearer $YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{"model": "${firstModel}", "messages": [{"role": "user", "content": "Hello"}]}'`;
-
-  const tsSnippet = `import { createOpenAI } from "@ai-sdk/openai-compatible";
-import { generateText } from "ai";
-
-const relayClient = createOpenAI({
-  name: "${relay.id}",
-  baseURL: "${relay.api}",
-  apiKey: process.env.${relay.auth.env[0] ?? "API_KEY"},
-});
-
-const { text } = await generateText({
-  model: relayClient("${firstModel}"),
-  prompt: "Hello",
-});`;
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8">
@@ -183,13 +150,6 @@ const { text } = await generateText({
         </div>
       </Section>
 
-      <Section title={t("detail.example")}>
-        <div className="space-y-4">
-          <CodeBlock title="Python · OpenAI SDK" code={pySnippet} />
-          <CodeBlock title="cURL" code={curlSnippet} />
-          <CodeBlock title="TypeScript · AI SDK" code={tsSnippet} />
-        </div>
-      </Section>
     </main>
   );
 }
@@ -228,20 +188,6 @@ function Field({
           <span className="text-sm">{value}</span>
         )}
       </dd>
-    </div>
-  );
-}
-
-function CodeBlock({ title, code }: { title: string; code: string }) {
-  return (
-    <div className="rounded-lg border border-border bg-card/50">
-      <div className="flex items-center justify-between border-b border-border px-4 py-2">
-        <span className="text-xs font-medium text-muted-foreground">{title}</span>
-        <CopyButton value={code} size="icon" />
-      </div>
-      <pre className="overflow-x-auto p-4 text-xs leading-relaxed">
-        <code>{code}</code>
-      </pre>
     </div>
   );
 }
