@@ -210,6 +210,10 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
 
   return (
     <div className="space-y-5">
+      <div>
+        <h2 className="text-lg font-semibold text-foreground">{t("providers.relays")}</h2>
+        <p className="mt-0.5 text-sm text-muted-foreground">{t("providers.relaysDesc")}</p>
+      </div>
       {/* 搜索框 */}
       <div className="relative">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
