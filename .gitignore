@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# WorkBuddy project memory (internal, not source)
+.workbuddy/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
