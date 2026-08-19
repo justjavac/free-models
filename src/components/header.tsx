@@ -1,50 +1,75 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun, Languages, Code } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, type FormEvent } from "react";
+import { Moon, Sun, Search } from "lucide-react";
 import { useApp } from "@/components/providers";
 import { Button } from "@/components/ui/button";
-import { monogramStyle, initial } from "@/lib/visual";
+import { Logo } from "@/components/logo";
+import { LanguageSelect } from "@/components/language-select";
+import { cn } from "@/lib/utils";
+import type { DictKey } from "@/lib/i18n";
+
+const NAV: { href: string; key: DictKey }[] = [
+  { href: "/", key: "nav.models" },
+  { href: "/providers", key: "nav.providers" },
+  { href: "/about", key: "nav.about" },
+];
 
 export function Header() {
-  const { t, locale, toggleLocale, theme, toggleTheme } = useApp();
+  const { t, theme, toggleTheme } = useApp();
+  const pathname = usePathname();
+  const router = useRouter();
+  const [q, setQ] = useState("");
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const onSearch = (e: FormEvent) => {
+    e.preventDefault();
+    const term = q.trim();
+    router.push(term ? `/?q=${encodeURIComponent(term)}` : "/");
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/70 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-4 px-4">
+      <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span
-            className="flex h-7 w-7 items-center justify-center rounded-lg text-sm font-bold text-white"
-            style={monogramStyle("relaydb")}
-          >
-            {initial("R")}
-          </span>
+          <Logo className="h-7 w-7" />
           <span className="text-foreground">{t("site.title")}</span>
         </Link>
 
-        <nav className="ml-2 hidden items-center gap-1 text-sm text-muted-foreground sm:flex">
-          <Link href="/" className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-foreground">
-            {t("nav.home")}
-          </Link>
-          <a
-            href="/catalog.json"
-            className="rounded-md px-3 py-1.5 hover:bg-accent hover:text-foreground"
-          >
-            {t("nav.api")}
-          </a>
+        <nav className="ml-2 hidden items-center gap-1 text-sm md:flex">
+          {NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "rounded-md px-3 py-1.5 transition-colors",
+                isActive(item.href)
+                  ? "bg-accent text-foreground font-medium"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground",
+              )}
+            >
+              {t(item.key)}
+            </Link>
+          ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1">
-          <Button variant="ghost" size="icon" onClick={toggleLocale} aria-label="language">
-            <Languages />
-          </Button>
+        <div className="ml-auto flex items-center gap-1.5">
+          <form onSubmit={onSearch} className="relative hidden sm:block">
+            <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder={t("nav.search")}
+              className="h-9 w-40 rounded-md border border-border bg-transparent pl-8 pr-2 text-sm text-foreground placeholder:text-muted-foreground transition-all focus:w-56 focus:outline-none focus:ring-1 focus:ring-ring"
+            />
+          </form>
+          <LanguageSelect />
           <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="theme">
             {theme === "dark" ? <Sun /> : <Moon />}
-          </Button>
-          <Button variant="ghost" size="icon" asChild aria-label="github">
-            <a href="https://github.com/anomalyco/models.dev" target="_blank" rel="noreferrer">
-              <Code />
-            </a>
           </Button>
         </div>
       </div>
