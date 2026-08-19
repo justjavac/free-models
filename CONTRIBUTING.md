@@ -9,7 +9,7 @@
 - `src/data/relays.ts` —— 中转站清单（含 API base、鉴权、免费额度、支持的厂商/模型）
 - `src/data/models.ts` —— 共享模型目录（跨中转站复用的模型规格）
 
-`model_count` 与每个模型的 `available_on`（在哪些中转站可用）由 `scripts/generate.ts` 在构建期**自动计算**，请勿手填。
+`model_count` 与每个模型的 `available_on`（在哪些中转站可用）由 `src/lib/data.ts` 在构建期**自动计算**（数据端点 `/api.json`、`/models.json`、`/catalog.json` 及 `/llms.txt` 均为路由静态生成），请勿手填。
 
 ## 新增 / 修正一家中转站
 
@@ -45,16 +45,16 @@
 ```
 
 2. 若模型不在 `models.ts` 中，先在 `models.ts` 补充模型规格。
-3. 运行 `npm run gen` 重新生成 `public/*.json`，确认无误后提交 PR。
+3. 运行 `npm run build` 验证（数据端点由路由静态生成，无需手动生成文件），确认无误后提交 PR。
 
 ## 本地开发
 
 ```bash
 npm install
-npm run dev        # 自动生成 JSON 并启动，访问 http://localhost:3000
-npm run build      # 生成 JSON + 生产构建
+npm run dev        # 启动开发服务器，访问 http://localhost:3000
+npm run build      # 生产构建（类型检查 + 静态页 + 数据端点）
 ```
 
 ## 校验
 
-CI 会自动执行 `npm run build`（包含类型检查与 JSON 生成）。PR 需通过 CI。
+CI 会自动执行 `npm run build`（包含类型检查）。PR 需通过 CI。
