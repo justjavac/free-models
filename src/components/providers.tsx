@@ -44,6 +44,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = locale;
     document.documentElement.classList.toggle("dark", theme === "dark");
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute("content", theme === "dark" ? "#09090b" : "#ffffff");
+    }
   }, [locale, theme]);
 
   const setLocale = (l: Locale) => {

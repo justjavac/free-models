@@ -35,6 +35,11 @@ function readQuery(key: string): string {
   return new URLSearchParams(window.location.search).get(key) ?? "";
 }
 
+function readSet(key: string): Set<string> {
+  const v = readQuery(key);
+  return new Set(v ? v.split(",").filter(Boolean) : []);
+}
+
 function RelayCard({ relay }: { relay: Relay }) {
   const { t, locale } = useApp();
   const fq = relay.free_quota;
@@ -143,17 +148,24 @@ export function SearchExplorer({ catalog }: { catalog: CatalogJson }) {
 
   const [q, setQ] = useState<string>(() => readQuery("q"));
   const searchRef = useRef<HTMLInputElement>(null);
-  const [freeTypes, setFreeTypes] = useState<Set<string>>(new Set());
-  const [regions, setRegions] = useState<Set<string>>(new Set());
-  const [providers, setProviders] = useState<Set<string>>(new Set());
-  const [statuses, setStatuses] = useState<Set<string>>(new Set());
-  const [openaiOnly, setOpenaiOnly] = useState(false);
+  const [freeTypes, setFreeTypes] = useState<Set<string>>(() => readSet("free"));
+  const [regions, setRegions] = useState<Set<string>>(() => readSet("region"));
+  const [providers, setProviders] = useState<Set<string>>(() => readSet("provider"));
+  const [statuses, setStatuses] = useState<Set<string>>(() => readSet("status"));
+  const [openaiOnly, setOpenaiOnly] = useState<boolean>(() => readQuery("openai") === "1");
 
-  // URL 同步（仅写回浏览器历史，不做状态初始化）
+  // URL 同步（全部筛选状态写回，可分享 / 刷新恢复）
   useEffect(() => {
-    const url = q ? `?q=${encodeURIComponent(q)}` : window.location.pathname;
-    window.history.replaceState(null, "", url);
-  }, [q]);
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (freeTypes.size) params.set("free", Array.from(freeTypes).join(","));
+    if (regions.size) params.set("region", Array.from(regions).join(","));
+    if (providers.size) params.set("provider", Array.from(providers).join(","));
+    if (statuses.size) params.set("status", Array.from(statuses).join(","));
+    if (openaiOnly) params.set("openai", "1");
+    const qs = params.toString();
+    window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
+  }, [q, freeTypes, regions, providers, statuses, openaiOnly]);
 
   // `/` 快捷键聚焦搜索
   useEffect(() => {

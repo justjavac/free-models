@@ -36,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
+        <meta name="theme-color" content="#09090b" />
         <script
           dangerouslySetInnerHTML={{
             __html:

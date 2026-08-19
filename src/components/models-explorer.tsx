@@ -42,7 +42,10 @@ export function ModelsExplorer({ catalog }: { catalog: CatalogJson }) {
 
   const [q, setQ] = useState<string>(() => readQuery("q"));
   const [provider, setProvider] = useState<string>(() => readQuery("provider"));
-  const [sort, setSort] = useState<SortKey>("latest");
+  const [sort, setSort] = useState<SortKey>(() => {
+    const s = readQuery("sort");
+    return s === "name" || s === "context" ? s : "latest";
+  });
   const [copied, setCopied] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -51,9 +54,10 @@ export function ModelsExplorer({ catalog }: { catalog: CatalogJson }) {
     const params = new URLSearchParams();
     if (q) params.set("q", q);
     if (provider) params.set("provider", provider);
+    if (sort !== "latest") params.set("sort", sort);
     const qs = params.toString();
     window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
-  }, [q, provider]);
+  }, [q, provider, sort]);
 
   // `/` 快捷键聚焦搜索
   useEffect(() => {
@@ -215,6 +219,30 @@ export function ModelsExplorer({ catalog }: { catalog: CatalogJson }) {
                       </button>
                     </div>
                     <div className="truncate text-xs text-muted-foreground">{m.id}</div>
+                  </div>
+
+                  {/* 移动端规格摘要 */}
+                  <div className="flex flex-wrap items-center gap-1 md:hidden">
+                    {m.context != null && (
+                      <span className="rounded bg-secondary/70 px-1.5 py-0.5 text-[11px] text-muted-foreground">
+                        {t("models.context")} {formatTokens(m.context)}
+                      </span>
+                    )}
+                    {m.reasoning && (
+                      <span className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[11px] text-emerald-400 ring-1 ring-emerald-500/20">
+                        {t("models.reasoning")}
+                      </span>
+                    )}
+                    {m.tool_call && (
+                      <span className="rounded bg-secondary/70 px-1.5 py-0.5 text-[11px] text-muted-foreground">
+                        {t("models.toolCall")}
+                      </span>
+                    )}
+                    {m.open_weights && (
+                      <span className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[11px] text-emerald-400 ring-1 ring-emerald-500/20">
+                        {t("models.open")}
+                      </span>
+                    )}
                   </div>
 
                   {/* 厂商（链接到 labs 页） */}
