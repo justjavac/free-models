@@ -110,33 +110,26 @@ function RelayRow({ relay }: { relay: Relay }) {
   );
 }
 
-/** 供应商页中转站列表（数据量小，无需搜索/筛选） */
+/** 中转站（供应商）列表（数据量小，无需搜索/筛选） */
 export function RelayList({ catalog }: { catalog: CatalogJson }) {
   const { t } = useApp();
   const relays = Object.values(catalog.api);
 
   return (
-    <div className="space-y-5">
-      <div>
-        <h2 className="text-lg font-semibold text-foreground">{t("providers.relays")}</h2>
-        <p className="mt-0.5 text-sm text-muted-foreground">{t("providers.relaysDesc")}</p>
+    <div className="overflow-hidden rounded-xl border border-border">
+      <div className="hidden border-b border-border bg-card/60 px-4 py-2 text-xs font-medium text-muted-foreground md:grid md:grid-cols-[1.1fr_1.4fr_1.6fr_0.9fr_0.55fr_0.9fr] md:gap-4">
+        <span>{t("providers.relays")}</span>
+        <span>{t("card.free")}</span>
+        <span>{t("providers.notes")}</span>
+        <span>{t("card.providers")}</span>
+        <span>{t("models.title")}</span>
+        <span className="text-right">{t("card.viewDetail")}</span>
       </div>
-
-      <div className="overflow-hidden rounded-xl border border-border">
-        <div className="hidden border-b border-border bg-card/60 px-4 py-2 text-xs font-medium text-muted-foreground md:grid md:grid-cols-[1.1fr_1.4fr_1.6fr_0.9fr_0.55fr_0.9fr] md:gap-4">
-          <span>{t("providers.relays")}</span>
-          <span>{t("card.free")}</span>
-          <span>{t("providers.notes")}</span>
-          <span>{t("card.providers")}</span>
-          <span>{t("models.title")}</span>
-          <span className="text-right">{t("card.viewDetail")}</span>
-        </div>
-        <ul className="divide-y divide-border">
-          {relays.map((r) => (
-            <RelayRow key={r.id} relay={r} />
-          ))}
-        </ul>
-      </div>
+      <ul className="divide-y divide-border">
+        {relays.map((r) => (
+          <RelayRow key={r.id} relay={r} />
+        ))}
+      </ul>
     </div>
   );
 }
