@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCatalog } from "@/lib/data";
 import { LabDetail } from "@/components/lab-detail";
+import { JsonLd } from "@/components/json-ld";
 
 export function generateStaticParams() {
   const catalog = getCatalog();
@@ -30,8 +31,24 @@ export default async function LabPage({ params }: { params: Promise<{ id: string
   const catalog = getCatalog();
   const models = Object.values(catalog.models).filter((m) => m.provider === id);
   if (models.length === 0) notFound();
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "模型库", item: "https://models.jjc.fun/" },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: id,
+        item: `https://models.jjc.fun/labs/${id}`,
+      },
+    ],
+  };
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
+      <JsonLd data={breadcrumb} />
       <LabDetail provider={id} models={models} />
     </main>
   );

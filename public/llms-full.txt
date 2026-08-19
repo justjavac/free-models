@@ -1,0 +1,513 @@
+# 中转站免费额度库 (Relay Free-Quota DB) — 全量数据
+
+> 收录 15 家中转站、21 个模型。数据由社区人工维护，价格与免费额度可能变化，请以官方为准。
+> 机器可读端点：/api.json、/models.json、/catalog.json（JSON）；本文件与 /llms.txt 为 LLM 友好文本。
+
+## 模型规格（21）
+
+### openai/gpt-4o
+- 名称：GPT-4o
+- 厂商：openai
+- 描述：OpenAI 多模态旗舰，文本/图像/音频统一推理。
+- 上下文：128000
+- 最大输出：16384
+- 输入模态：text, image, audio
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-05-13
+- 价格（$/1M tokens）：输入 $2.5，输出 $10
+- 可免费使用的中转站：anyrouter, agentrouter, openrouter, aiionly, 302ai, requesty, aiproxy
+
+### openai/gpt-4o-mini
+- 名称：GPT-4o mini
+- 厂商：openai
+- 描述：高性价比小模型，适合大规模高频调用。
+- 上下文：128000
+- 最大输出：16384
+- 输入模态：text, image
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-07-18
+- 价格（$/1M tokens）：输入 $0.15，输出 $0.6
+- 可免费使用的中转站：anyrouter, agentrouter, iflow
+
+### openai/gpt-4.1
+- 名称：GPT-4.1
+- 厂商：openai
+- 描述：面向 agent 与长上下文优化的模型。
+- 上下文：1000000
+- 最大输出：32768
+- 输入模态：text, image
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2025-04-14
+- 价格（$/1M tokens）：输入 $2，输出 $8
+- 可免费使用的中转站：anyrouter
+
+### anthropic/claude-sonnet-4
+- 名称：Claude Sonnet 4
+- 厂商：anthropic
+- 描述：均衡的智能与速度，coding / agent 主力。
+- 上下文：200000
+- 最大输出：64000
+- 输入模态：text, image
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：否
+- 发布：2025-05-22
+- 价格（$/1M tokens）：输入 $3，输出 $15
+- 可免费使用的中转站：anyrouter, agentrouter, openrouter, aiionly, 302ai, requesty, aiproxy
+
+### anthropic/claude-opus-4
+- 名称：Claude Opus 4
+- 厂商：anthropic
+- 描述：Anthropic 最强推理与复杂任务模型。
+- 上下文：200000
+- 最大输出：64000
+- 输入模态：text, image
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：否
+- 发布：2025-05-22
+- 价格（$/1M tokens）：输入 $15，输出 $75
+- 可免费使用的中转站：anyrouter, agentrouter
+
+### anthropic/claude-3.5-haiku
+- 名称：Claude 3.5 Haiku
+- 厂商：anthropic
+- 描述：低成本高速模型，适合轻量任务。
+- 上下文：200000
+- 最大输出：8192
+- 输入模态：text, image
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-11-04
+- 价格（$/1M tokens）：输入 $0.8，输出 $4
+- 可免费使用的中转站：anyrouter
+
+### google/gemini-2.5-flash
+- 名称：Gemini 2.5 Flash
+- 厂商：google
+- 描述：高速低成本多模态模型，支持长上下文。
+- 上下文：1000000
+- 最大输出：65536
+- 输入模态：text, image, audio, video
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：否
+- 发布：2025-04-09
+- 价格（$/1M tokens）：输入 $0.1，输出 $0.4
+- 可免费使用的中转站：anyrouter, agentrouter, openrouter, aiionly, 302ai
+
+### google/gemini-2.5-pro
+- 名称：Gemini 2.5 Pro
+- 厂商：google
+- 描述：Google 旗舰多模态推理模型。
+- 上下文：1000000
+- 最大输出：65536
+- 输入模态：text, image, audio, video
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：否
+- 发布：2025-03-25
+- 价格（$/1M tokens）：输入 $1.25，输出 $10
+- 可免费使用的中转站：anyrouter, agentrouter, requesty
+
+### deepseek/deepseek-chat
+- 名称：DeepSeek Chat (V3)
+- 厂商：deepseek
+- 描述：开源 MoE 通用模型，中文与代码能力强。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：是
+- 发布：2024-12-26
+- 价格（$/1M tokens）：输入 $0.27，输出 $1.1
+- 可免费使用的中转站：anyrouter, agentrouter, openrouter, siliconflow, ppio, aiionly, iflow, modelscope, xiaomi-mimo, nvidia-mim, 302ai, requesty, aiproxy, hunyuan, volcengine
+
+### deepseek/deepseek-reasoner
+- 名称：DeepSeek Reasoner (R1)
+- 厂商：deepseek
+- 描述：开源推理模型，擅长数学与代码。
+- 上下文：64000
+- 最大输出：8192
+- 输入模态：text
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：是
+- 发布：2025-01-20
+- 价格（$/1M tokens）：输入 $0.55，输出 $2.19
+- 可免费使用的中转站：anyrouter, agentrouter, siliconflow, ppio
+
+### qwen/qwen-max
+- 名称：Qwen Max
+- 厂商：qwen
+- 描述：通义千问旗舰模型，中文综合能力领先。
+- 上下文：32768
+- 最大输出：8192
+- 输入模态：text, image
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-09-19
+- 价格（$/1M tokens）：输入 $1.6，输出 $6.4
+- 可免费使用的中转站：anyrouter, agentrouter, openrouter, siliconflow, ppio, aiionly, iflow, modelscope, xiaomi-mimo, 302ai, aiproxy, hunyuan, volcengine
+
+### qwen/qwen-plus
+- 名称：Qwen Plus
+- 厂商：qwen
+- 描述：均衡性价比的通义千问模型。
+- 上下文：131072
+- 最大输出：8192
+- 输入模态：text, image
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-09-19
+- 价格（$/1M tokens）：输入 $0.8，输出 $2
+- 可免费使用的中转站：暂无
+
+### qwen/qwen2.5-72b-instruct
+- 名称：Qwen2.5-72B Instruct
+- 厂商：qwen
+- 描述：开源 720 亿参数指令模型。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：是
+- 发布：2024-09-19
+- 可免费使用的中转站：siliconflow, modelscope
+
+### zhipu/glm-4-plus
+- 名称：GLM-4 Plus
+- 厂商：zhipu
+- 描述：智谱 GLM 旗舰模型。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text, image
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-08-20
+- 可免费使用的中转站：agentrouter, iflow, nvidia-mim
+
+### zhipu/glm-4-flash
+- 名称：GLM-4 Flash
+- 厂商：zhipu
+- 描述：免费高速的 GLM 模型。
+- 上下文：128000
+- 最大输出：4096
+- 输入模态：text
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-08-20
+- 价格（$/1M tokens）：输入 $0，输出 $0
+- 可免费使用的中转站：siliconflow, modelscope
+
+### moonshot/kimi-k2
+- 名称：Kimi K2
+- 厂商：moonshot
+- 描述：月之暗面开源 MoE 大模型，agent 能力强。
+- 上下文：256000
+- 最大输出：32000
+- 输入模态：text
+- 输出模态：text
+- 推理：是
+- 工具调用：是
+- 开放权重：是
+- 发布：2025-07-11
+- 可免费使用的中转站：siliconflow
+
+### xai/grok-2
+- 名称：Grok 2
+- 厂商：xai
+- 描述：xAI 多模态模型，支持实时信息。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text, image
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-08-13
+- 价格（$/1M tokens）：输入 $2，输出 $10
+- 可免费使用的中转站：anyrouter, openrouter
+
+### meta/llama-3.1-70b
+- 名称：Llama 3.1 70B
+- 厂商：meta
+- 描述：Meta 开源 700 亿参数多语言模型。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：是
+- 发布：2024-07-23
+- 可免费使用的中转站：anyrouter, openrouter, siliconflow, ppio, modelscope, nvidia-mim
+
+### meta/llama-3.1-8b
+- 名称：Llama 3.1 8B
+- 厂商：meta
+- 描述：轻量开源模型，适合边缘与高频场景。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：是
+- 发布：2024-07-23
+- 可免费使用的中转站：siliconflow
+
+### mistral/mistral-large
+- 名称：Mistral Large
+- 厂商：mistral
+- 描述：Mistral 旗舰闭源模型。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-02-26
+- 价格（$/1M tokens）：输入 $2，输出 $6
+- 可免费使用的中转站：anyrouter, openrouter
+
+### minimax/abab6.5
+- 名称：MiniMax ABAB6.5
+- 厂商：minimax
+- 描述：MiniMax 通用大模型。
+- 上下文：128000
+- 最大输出：8192
+- 输入模态：text
+- 输出模态：text
+- 推理：否
+- 工具调用：是
+- 开放权重：否
+- 发布：2024-09-01
+- 可免费使用的中转站：siliconflow, ppio, nvidia-mim
+
+## 中转站（15）
+
+### AnyRouter（anyrouter）
+- 官网：https://anyrouter.dev
+- API：https://anyrouter.dev/api/v1
+- OpenAI 兼容：是
+- 免费额度：credit · $2 / 月免费额度 + 部分模型永久免费 + 共享 key 池
+- 免费额度说明：无需信用卡；可捐献自有 key 进入共享池，按贡献返现。
+- 计费：按上游原价计费，不加成。
+- 支持厂商：openai, anthropic, google, qwen, deepseek, xai, meta, mistral
+- 模型数：14
+- 区域：global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### AgentRouter（agentrouter）
+- 官网：https://agentrouter.org
+- API：https://agentrouter.org/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 注册送 $200（邀请） / 每日签到 $25
+- 免费额度说明：GitHub 登录；公益性质，按上游原价计费不加成。
+- 计费：按零售价计费。
+- 支持厂商：openai, anthropic, deepseek, zhipu, google, qwen
+- 模型数：10
+- 区域：global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### OpenRouter（openrouter）
+- 官网：https://openrouter.ai
+- API：https://openrouter.ai/api/v1
+- OpenAI 兼容：是
+- 免费额度：free_models · 部分开源模型永久免费（如 meta-llama/*、deepseek 等）
+- 免费额度说明：免费模型列表随平台调整，详见官网。
+- 计费：在厂商价基础上少量加成。
+- 支持厂商：openai, anthropic, google, deepseek, qwen, meta, mistral, xai, zhipu
+- 模型数：8
+- 区域：global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 硅基流动 SiliconFlow（siliconflow）
+- 官网：https://siliconflow.cn
+- API：https://api.siliconflow.cn/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 新用户赠送 14 元额度（约 2000 万 token）
+- 免费额度说明：与华为云联合，基于昇腾云推理。
+- 计费：按厂商价计费。
+- 支持厂商：deepseek, qwen, zhipu, meta, moonshot, minimax
+- 模型数：9
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### PPIO 派欧云（ppio）
+- 官网：https://ppio.cn
+- API：https://api.ppio.cn/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 新用户赠送试用额度（需核实具体数额）
+- 免费额度说明：免费额度具体数额需核实。
+- 计费：retail
+- 支持厂商：deepseek, qwen, meta, llama, minimax
+- 模型数：5
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 唯一AI（aiionly）
+- 官网：https://www.aiionly.com
+- API：https://api.aiionly.com/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 邀请注册送 15 元额度
+- 免费额度说明：服务稳定，聚合国内外热门模型。
+- 计费：retail
+- 支持厂商：openai, anthropic, deepseek, qwen, google, claude
+- 模型数：5
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 心流AI 开放平台（iflow）
+- 官网：https://platform.iflow.cn
+- API：https://platform.iflow.cn/v1
+- OpenAI 兼容：是
+- 免费额度：free_models · 每日 2000 次免费调用
+- 免费额度说明：用 AI 重塑研发范式。
+- 计费：retail
+- 支持厂商：deepseek, qwen, zhipu, openai, anthropic
+- 模型数：4
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 魔塔社区 ModelScope（modelscope）
+- 官网：https://modelscope.cn
+- API：https://api.modelscope.cn/v1
+- OpenAI 兼容：是
+- 免费额度：free_models · 每日 2000 次免费调用
+- 免费额度说明：中国最大 AI 大模型开源社区。
+- 计费：free
+- 支持厂商：deepseek, qwen, llama, glm
+- 模型数：5
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 小米 Mimo 开放平台（xiaomi-mimo）
+- 官网：https://platform.xiaomimimo.com
+- API：https://platform.xiaomimimo.com/v1
+- OpenAI 兼容：是
+- 免费额度：unlimited · 公测期间无限制免费调用
+- 免费额度说明：基于 Xiaomi Mimo 开源模型，适合 AI 编程开发。
+- 计费：free
+- 支持厂商：xiaomi, deepseek, qwen
+- 模型数：2
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### NVIDIA MIM (build.nvidia.com)（nvidia-mim）
+- 官网：https://build.nvidia.com
+- API：https://integrate.api.nvidia.com/v1
+- OpenAI 兼容：是
+- 免费额度：unlimited · 面向开发研究无限制免费调用（部分模型）
+- 免费额度说明：提供 GLM-4.7、MiniMax 2.1 等顶级开源模型推理接口。
+- 计费：free
+- 支持厂商：nvidia, zhipu, minimax, meta, deepseek
+- 模型数：4
+- 区域：global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 302.AI（302ai）
+- 官网：https://302.ai
+- API：https://api.302.ai/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 注册赠送试用额度（需核实具体数额）
+- 免费额度说明：聚合多模型，含图像/视频等；免费额度需核实。
+- 计费：retail
+- 支持厂商：openai, anthropic, google, deepseek, qwen, meta
+- 模型数：5
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### Requesty（requesty）
+- 官网：https://requesty.ai
+- API：https://router.requesty.ai/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 新用户免费额度（需核实具体数额）
+- 免费额度说明：含路由/回退与评测；免费额度需核实。
+- 计费：markup
+- 支持厂商：openai, anthropic, google, deepseek, meta
+- 模型数：4
+- 区域：global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### AiProxy（aiproxy）
+- 官网：https://aiproxy.com
+- API：https://api.aiproxy.com/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 免费试用额度（需核实具体数额）
+- 免费额度说明：聚合网关；免费额度需核实。
+- 计费：retail
+- 支持厂商：openai, anthropic, deepseek, qwen, google
+- 模型数：4
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 腾讯混元 Hunyuan（hunyuan）
+- 官网：https://cloud.tencent.com/product/hunyuan
+- API：https://api.hunyuan.cloud.tencent.com/v1
+- OpenAI 兼容：是
+- 免费额度：credit · 腾讯云新用户免费额度（需实名）
+- 免费额度说明：腾讯云大模型知识引擎，含免费资源包。
+- 计费：retail
+- 支持厂商：tencent, deepseek, qwen
+- 模型数：2
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+
+### 火山方舟 Volcengine（volcengine）
+- 官网：https://www.volcengine.com/product/ark
+- API：https://ark.cn-beijing.volces.com/api/v3
+- OpenAI 兼容：是
+- 免费额度：credit · 火山方舟新手免费额度
+- 免费额度说明：豆包大模型平台，含免费试用额度。
+- 计费：retail
+- 支持厂商：volcengine, deepseek, qwen
+- 模型数：2
+- 区域：cn, global
+- 状态：operational
+- 更新时间：2026-08-19
+

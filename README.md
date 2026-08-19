@@ -17,7 +17,9 @@
   - `GET /models.json` —— 按模型 id 为键
   - `GET /catalog.json` —— 二者合并
   - 均带 `Cache-Control: public, max-age=31536000, immutable`
-- **高性能**：全站 SSG（55 个静态页），前端仅内存检索，无后端请求；`/` 快捷键聚焦搜索。
+- **SEO 友好**：JSON-LD 结构化数据（WebSite / ItemList / BreadcrumbList）、自动生成的 OG/Twitter 品牌图（1200×630）、canonical、sitemap、robots。
+- **LLM 友好**：`GET /llms.txt` 与 `GET /llms-full.txt`（[llms.txt 规范](https://llmstxt.org)）供 LLM / AI 工具读取站点索引与全量数据，构建期自动生成。
+- **高性能**：全站 SSG（55 个静态页），前端仅内存检索，无后端请求。
 
 ## 数据来源
 

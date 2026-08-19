@@ -16,14 +16,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "中转站免费额度库 · Relay Free-Quota DB",
-  description:
-    "只收录提供免费额度的 LLM 中转站 / 聚合网关。OpenAI 兼容、可检索、数据以 JSON 开放可被 curl 取用。",
   metadataBase: new URL("https://models.jjc.fun"),
+  title: {
+    default: "中转站免费额度库 · Relay Free-Quota DB",
+    template: "%s · Relay Free-Quota DB",
+  },
+  description:
+    "只收录提供免费额度的 LLM 中转站 / 聚合网关。OpenAI 兼容、免费额度明细、模型规格，数据以 JSON 开放可被 curl 取用，支持 LLM 与 AI 工具读取。",
+  applicationName: "Relay Free-Quota DB",
+  keywords: [
+    "LLM",
+    "中转站",
+    "API",
+    "免费额度",
+    "OpenAI 兼容",
+    "聚合网关",
+    "大模型",
+    "models.dev",
+    "llms.txt",
+  ],
+  authors: [{ name: "Relay Free-Quota DB" }],
+  creator: "Relay Free-Quota DB",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "中转站免费额度库",
-    description: "只收录提供免费额度的 LLM 中转站 / 聚合网关。",
     type: "website",
+    locale: "zh_CN",
+    siteName: "中转站免费额度库 · Relay Free-Quota DB",
+    title: "中转站免费额度库 · Relay Free-Quota DB",
+    description:
+      "只收录提供免费额度的 LLM 中转站 / 聚合网关，数据以 JSON 开放，可被 curl 取用。",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "中转站免费额度库 · Relay Free-Quota DB",
+    description: "只收录提供免费额度的 LLM 中转站 / 聚合网关，数据以 JSON 开放。",
   },
   robots: { index: true, follow: true },
 };
