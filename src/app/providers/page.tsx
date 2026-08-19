@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { getCatalog } from "@/lib/data";
-import { SearchExplorer } from "@/components/search-explorer";
+import { RelayList } from "@/components/relay-list";
 import { ProviderGrid } from "@/components/provider-grid";
 import { PageHeader } from "@/components/page-header";
 
 export const metadata: Metadata = {
   title: "供应商 · Relay Free-Quota DB",
-  description: "模型厂商与提供免费额度的 LLM 中转站列表，可按免费类型、区域、厂商筛选。",
+  description: "模型厂商与提供免费额度的 LLM 中转站列表。",
 };
 
 export default function ProvidersPage() {
@@ -16,7 +16,7 @@ export default function ProvidersPage() {
       <PageHeader titleKey="nav.providers" descKey="site.tagline" />
       <div className="space-y-10">
         <ProviderGrid catalog={catalog} />
-        <SearchExplorer catalog={catalog} />
+        <RelayList catalog={catalog} />
       </div>
     </main>
   );
