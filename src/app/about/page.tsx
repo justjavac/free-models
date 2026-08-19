@@ -13,7 +13,7 @@ export default function AboutPage() {
   const relayCount = Object.keys(catalog.api).length;
   const modelCount = Object.keys(catalog.models).length;
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
+    <main className="mx-auto max-w-4xl px-4 py-8">
       <PageHeader titleKey="about.title" />
       <AboutContent relayCount={relayCount} modelCount={modelCount} />
     </main>

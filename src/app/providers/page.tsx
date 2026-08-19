@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ProvidersPage() {
   const catalog = getCatalog();
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
+    <main className="mx-auto max-w-[1600px] px-4 py-6">
       <PageHeader titleKey="nav.providers" descKey="site.tagline" />
       <SearchExplorer catalog={catalog} />
     </main>
