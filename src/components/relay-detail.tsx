@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ExternalLink, Minus } from "lucide-react";
 import type { ReactNode } from "react";
-import type { CatalogJson, FreeQuotaType, Relay, RelayStatus } from "@/lib/types";
+import type { CatalogJson, FreeQuotaType, Model, Relay, RelayStatus } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { CopyButton } from "@/components/copy-button";
 import { useApp } from "@/components/providers";
-import { monogramStyle, initial } from "@/lib/visual";
+import { RelayLogo } from "@/components/logo";
+import { formatTokens } from "@/lib/format";
 import type { DictKey } from "@/lib/i18n";
 
 const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warning"> = {
@@ -27,6 +28,7 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
   const { t, locale } = useApp();
   const fq = relay.free_quota;
   const fType = fq.type as FreeQuotaType | undefined;
+  const modelCount = Object.keys(relay.models).length;
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
@@ -37,37 +39,36 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
         <ArrowLeft className="h-4 w-4" /> {t("detail.back")}
       </Link>
 
-      <div className="flex items-start gap-4">
-        <span
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-xl font-bold text-white"
-          style={monogramStyle(relay.id)}
-        >
-          {initial(relay.name)}
-        </span>
+      {/* 头部：logo + 名称 + id + 状态（对齐 models.dev） */}
+      <header className="flex flex-wrap items-start gap-4">
+        <RelayLogo id={relay.id} name={relay.name} size={56} />
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold">{relay.name}</h1>
-            <span className={`h-2.5 w-2.5 rounded-full ${STATUS_DOT[relay.status]}`} />
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-2xl font-bold tracking-tight">{relay.name}</h1>
+            <span className="font-mono text-sm text-muted-foreground">{relay.id}</span>
+            <span className={`inline-block h-2.5 w-2.5 rounded-full ${STATUS_DOT[relay.status]}`} />
             <span className="text-sm text-muted-foreground">
               {t(`status.${relay.status}` as DictKey)}
             </span>
           </div>
-          <a
-            href={relay.url}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
-            {relay.url}
-          </a>
+          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+            <a href={relay.url} target="_blank" rel="noreferrer" className="hover:text-foreground">
+              {relay.url.replace(/^https?:\/\//, "")}
+            </a>
+            {relay.openai_compatible && <Badge variant="info">OpenAI Compatible</Badge>}
+            {relay.region.map((r) => (
+              <Badge key={r} variant="outline">
+                {t(`region.${r}` as DictKey)}
+              </Badge>
+            ))}
+          </div>
           <div className="mt-2 flex flex-wrap gap-2">
             {fq.available && fType && (
               <Badge variant={FREE_VARIANT[fType]}>{t(`free.${fType}` as DictKey)}</Badge>
             )}
-            {relay.openai_compatible && <Badge variant="info">OpenAI</Badge>}
-            {relay.region.map((r) => (
-              <Badge key={r} variant="outline">
-                {t(`region.${r}` as DictKey)}
+            {relay.features.map((f) => (
+              <Badge key={f} variant="outline">
+                {f}
               </Badge>
             ))}
           </div>
@@ -80,33 +81,48 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
             </Badge>
           </a>
         </div>
-      </div>
+      </header>
 
-      <Section title={t("detail.overview")}>
-        <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Field label={t("detail.apiBase")} value={relay.api} isCode />
-          <Field label={t("detail.env")} value={relay.auth.env.join(", ")} isCode />
-          <Field
-            label={t("detail.openai")}
-            value={relay.openai_compatible ? t("detail.openai") : t("detail.notOpenai")}
-          />
-          <Field
-            label={t("auth.api_key")}
-            value={t(`auth.${relay.auth.type}` as DictKey)}
-          />
-          <Field label={t("detail.providers")} value={relay.providers.join(", ")} />
-          <Field label={t("detail.pricing")} value={relay.pricing.notes ?? relay.pricing.model} />
-          {relay.doc && <Field label={t("card.doc")} value={relay.doc} isLink />}
-          <Field label={t("detail.updated")} value={relay.updated_at} />
-        </dl>
-      </Section>
+      {/* 统计条（对齐 models.dev 的 Models / Package / API / Docs） */}
+      <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <Stat label={locale === "zh" ? "收录模型" : "Models"} value={String(modelCount)} />
+        <Stat
+          label="Package"
+          value={relay.npm ?? "@ai-sdk/openai-compatible"}
+          mono
+        />
+        <Stat label="API" value={relay.api} mono breakAll />
+        <Stat
+          label={t("card.doc")}
+          value={
+            relay.doc ? (
+              <a
+                href={relay.doc}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sky-400 underline hover:text-sky-300"
+              >
+                {locale === "zh" ? "文档" : "Docs"} ↗
+              </a>
+            ) : (
+              "—"
+            )
+          }
+        />
+      </section>
 
-      <Section title={t("detail.freeQuota")}>
-        <div className="rounded-lg border border-border bg-card/50 p-4">
+      {/* 免费额度 */}
+      <section className="mt-6">
+        <h2 className="mb-2 text-lg font-semibold">{t("detail.freeQuota")}</h2>
+        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
           {fq.available ? (
             <div className="space-y-2">
-              {fType && <Badge variant={FREE_VARIANT[fType]}>{t(`free.${fType}` as DictKey)}</Badge>}
-              <p className="text-sm">{fq.amount}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                {fType && (
+                  <Badge variant={FREE_VARIANT[fType]}>{t(`free.${fType}` as DictKey)}</Badge>
+                )}
+                <span className="text-sm font-semibold">{fq.amount}</span>
+              </div>
               {fq.notes && <p className="text-sm text-muted-foreground">{fq.notes}</p>}
               {fq.expires && (
                 <p className="text-xs text-muted-foreground">
@@ -120,74 +136,111 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
             </p>
           )}
         </div>
-      </Section>
+      </section>
 
-      <Section title={t("detail.modelsOffered")}>
-        <div className="overflow-hidden rounded-lg border border-border">
+      {/* 模型表（对齐 models.dev 列：Model/ID/Context/Output/Price/Reasoning/Tool Call/Structured） */}
+      <section className="mt-6">
+        <h2 className="mb-2 text-lg font-semibold">
+          {t("detail.modelsOffered")}{" "}
+          <span className="text-sm font-normal text-muted-foreground">({modelCount})</span>
+        </h2>
+        <div className="overflow-x-auto rounded-lg border border-border">
           <table className="w-full text-sm">
-            <thead className="bg-muted/40 text-left text-muted-foreground">
+            <thead className="bg-muted/40 text-left text-xs text-muted-foreground">
               <tr>
-                <th className="px-4 py-2 font-medium">ID</th>
-                <th className="px-4 py-2 font-medium">{t("detail.providers")}</th>
-                <th className="px-4 py-2 font-medium">{t("detail.availableOn")}</th>
+                <th className="px-3 py-2 font-medium">{t("detail.modelName")}</th>
+                <th className="px-3 py-2 font-medium">ID</th>
+                <th className="px-3 py-2 font-medium">{t("models.context")}</th>
+                <th className="px-3 py-2 font-medium">{t("models.maxOutput")}</th>
+                <th className="px-3 py-2 font-medium">{t("detail.price")}</th>
+                <th className="px-3 py-2 font-medium">{t("models.reasoning")}</th>
+                <th className="px-3 py-2 font-medium">{t("models.toolCall")}</th>
+                <th className="px-3 py-2 font-medium">{t("models.structured")}</th>
+                <th className="px-3 py-2 font-medium">{t("detail.availableOn")}</th>
               </tr>
             </thead>
             <tbody>
               {Object.entries(relay.models).map(([id]) => {
                 const m = catalog.models[id];
-                return (
-                  <tr key={id} className="border-t border-border">
-                    <td className="px-4 py-2 font-mono text-xs">{id}</td>
-                    <td className="px-4 py-2">{m?.provider ?? "?"}</td>
-                    <td className="px-4 py-2 text-xs text-muted-foreground">
-                      {m?.available_on.length ?? 0} {locale === "zh" ? "家中转站" : "relays"}
-                    </td>
-                  </tr>
-                );
+                return <ModelRow key={id} id={id} model={m} />;
               })}
             </tbody>
           </table>
         </div>
-      </Section>
-
+      </section>
     </main>
   );
 }
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function ModelRow({ id, model }: { id: string; model?: Model }) {
+  const { locale } = useApp();
   return (
-    <section className="mt-8">
-      <h2 className="mb-3 text-lg font-semibold">{title}</h2>
-      {children}
-    </section>
+    <tr className="border-t border-border">
+      <td className="px-3 py-2">
+        <Link
+          href={`/models/${id}`}
+          className="font-medium text-foreground hover:underline"
+        >
+          {model?.name ?? id}
+        </Link>
+      </td>
+      <td className="px-3 py-2 font-mono text-xs text-muted-foreground">{id}</td>
+      <td className="px-3 py-2 text-muted-foreground">{formatTokens(model?.context)}</td>
+      <td className="px-3 py-2 text-muted-foreground">{formatTokens(model?.max_output)}</td>
+      <td className="px-3 py-2 text-muted-foreground">
+        {model?.price
+          ? `$${model.price.input?.toFixed(2)} / $${model.price.output?.toFixed(2)}`
+          : "—"}
+      </td>
+      <td className="px-3 py-2">
+        {model?.reasoning ? (
+          <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+        ) : (
+          <Minus className="h-4 w-4 text-muted-foreground/40" />
+        )}
+      </td>
+      <td className="px-3 py-2">
+        {model?.tool_call ? (
+          <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+        ) : (
+          <Minus className="h-4 w-4 text-muted-foreground/40" />
+        )}
+      </td>
+      <td className="px-3 py-2">
+        {model?.structured_output ? (
+          <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+        ) : (
+          <Minus className="h-4 w-4 text-muted-foreground/40" />
+        )}
+      </td>
+      <td className="px-3 py-2 text-xs text-muted-foreground">
+        {model?.available_on.length ?? 0} {locale === "zh" ? "家" : ""}
+      </td>
+    </tr>
   );
 }
 
-function Field({
+function Stat({
   label,
   value,
-  isCode,
-  isLink,
+  mono,
+  breakAll,
 }: {
   label: string;
-  value: string;
-  isCode?: boolean;
-  isLink?: boolean;
+  value: ReactNode;
+  mono?: boolean;
+  breakAll?: boolean;
 }) {
   return (
     <div className="rounded-lg border border-border bg-card/50 p-3">
-      <dt className="text-xs text-muted-foreground">{label}</dt>
-      <dd className="mt-1 break-all">
-        {isLink ? (
-          <a href={value} target="_blank" rel="noreferrer" className="text-sm text-sky-400 underline">
-            {value}
-          </a>
-        ) : isCode ? (
-          <code className="text-sm">{value}</code>
-        ) : (
-          <span className="text-sm">{value}</span>
-        )}
-      </dd>
+      <div className="text-xs text-muted-foreground">{label}</div>
+      <div
+        className={`mt-0.5 text-sm font-medium text-foreground ${mono ? "font-mono" : ""} ${
+          breakAll ? "break-all" : "truncate"
+        }`}
+      >
+        {value}
+      </div>
     </div>
   );
 }

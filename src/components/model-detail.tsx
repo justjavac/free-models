@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft, Copy, Check, ExternalLink } from "lucide-react";
+import { ArrowLeft, Copy, Check, ExternalLink, Layers, Zap } from "lucide-react";
 import type { CatalogJson, FreeQuotaType, Model } from "@/lib/types";
 import { useApp } from "@/components/providers";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { monogramStyle, initial } from "@/lib/visual";
+import { ProviderLogo, RelayLogo } from "@/components/logo";
 import { formatTokens } from "@/lib/format";
 import type { DictKey } from "@/lib/i18n";
 
@@ -44,54 +44,87 @@ export function ModelDetail({ model, catalog }: { model: Model; catalog: Catalog
   return (
     <div className="space-y-6">
       <Button variant="ghost" size="sm" asChild className="-ml-2">
-        <Link href="/">
+        <Link href="/models">
           <ArrowLeft className="h-4 w-4" />
           {t("models.back")}
         </Link>
       </Button>
 
-      {/* 标题 */}
-      <div>
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">{model.name}</h1>
-          <button
-            type="button"
-            onClick={copyId}
-            title={t("models.copyId")}
-            aria-label={t("models.copyId")}
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {copied ? (
-              <Check className="h-4 w-4 text-emerald-400" />
-            ) : (
-              <Copy className="h-4 w-4" />
-            )}
-          </button>
+      {/* 标题：厂商 logo + 名称 + ID */}
+      <header className="flex items-start gap-4">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-border bg-card/60">
+          <ProviderLogo id={model.provider} size={36} />
         </div>
-        <p className="mt-1 font-mono text-sm text-muted-foreground">{model.id}</p>
-        {model.description && (
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            {model.description}
-          </p>
-        )}
-      </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">{model.name}</h1>
+            <button
+              type="button"
+              onClick={copyId}
+              title={t("models.copyId")}
+              aria-label={t("models.copyId")}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {copied ? (
+                <Check className="h-4 w-4 text-emerald-400" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+            </button>
+          </div>
+          <div className="mt-0.5 flex flex-wrap items-center gap-2 font-mono text-sm text-muted-foreground">
+            {model.id}
+            <Link
+              href={`/labs/${model.provider}`}
+              className="rounded bg-secondary px-1.5 py-0.5 text-xs capitalize text-secondary-foreground hover:underline"
+            >
+              {model.provider}
+            </Link>
+            {model.open_weights && (
+              <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-xs text-emerald-400 ring-1 ring-emerald-500/25">
+                {t("models.open")}
+              </span>
+            )}
+          </div>
+          {model.description && (
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              {model.description}
+            </p>
+          )}
+        </div>
+      </header>
 
-      {/* 规格 */}
+      {/* 关键规格条：上下文 / 输出 / 价格（价格醒目） */}
+      <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <KeySpec
+          icon={<Layers className="h-4 w-4" />}
+          label={t("models.context")}
+          value={model.context ? model.context.toLocaleString() : "—"}
+          sub={`≈ ${formatTokens(model.context)}`}
+        />
+        <KeySpec
+          icon={<Zap className="h-4 w-4" />}
+          label={t("models.maxOutput")}
+          value={formatTokens(model.max_output)}
+          sub={model.max_output ? model.max_output.toLocaleString() : undefined}
+        />
+        <KeySpec
+          label={t("detail.price")}
+          value={
+            model.price
+              ? `$${fmtPrice(model.price.input)} / $${fmtPrice(model.price.output)}`
+              : "—"
+          }
+          sub={model.price ? "input / output · 每百万 token" : undefined}
+          accent={!!model.price}
+        />
+      </section>
+
+      {/* 详细规格 */}
       <Card>
         <CardContent className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
-          <Spec label={t("models.provider")} value={model.provider} />
-          <Spec
-            label={t("models.context")}
-            value={model.context ? model.context.toLocaleString() : "—"}
-          />
-          <Spec
-            label={t("models.input")}
-            value={model.modalities.input.join(" / ") || "—"}
-          />
-          <Spec
-            label={t("models.output")}
-            value={model.modalities.output.join(" / ") || "—"}
-          />
+          <Spec label={t("models.input")} value={model.modalities.input.join(" / ") || "—"} />
+          <Spec label={t("models.output")} value={model.modalities.output.join(" / ") || "—"} />
           <Spec
             label={t("models.reasoning")}
             value={t(model.reasoning ? "detail.yes" : "detail.no")}
@@ -103,27 +136,25 @@ export function ModelDetail({ model, catalog }: { model: Model; catalog: Catalog
             yes={model.tool_call}
           />
           <Spec
+            label={t("models.structured")}
+            value={t(model.structured_output ? "detail.yes" : "detail.no")}
+            yes={model.structured_output}
+          />
+          <Spec
             label={t("models.weights")}
             value={model.open_weights ? t("models.open") : t("models.closed")}
             yes={model.open_weights}
           />
           <Spec label={t("models.released")} value={model.release_date ?? "—"} />
-          <Spec label={t("models.maxOutput")} value={formatTokens(model.max_output)} />
-          <Spec
-            label={t("detail.price")}
-            value={
-              model.price
-                ? `$${fmtPrice(model.price.input)} / $${fmtPrice(model.price.output)}`
-                : "—"
-            }
-          />
+          <Spec label={t("models.availableOn")} value={String(model.available_on.length)} />
         </CardContent>
       </Card>
 
       {/* 可免费使用的中转站 */}
       <div>
         <h2 className="mb-3 text-sm font-semibold text-foreground">
-          {t("models.availableRelays")}
+          {t("models.availableRelays")}{" "}
+          <span className="font-normal text-muted-foreground">({relays.length})</span>
         </h2>
         {relays.length === 0 ? (
           <p className="text-sm text-muted-foreground">—</p>
@@ -137,12 +168,7 @@ export function ModelDetail({ model, catalog }: { model: Model; catalog: Catalog
                     href={`/relay/${r.id}`}
                     className="group flex items-center gap-3 rounded-xl border border-border bg-card/50 p-3 transition-colors hover:border-foreground/30"
                   >
-                    <span
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white"
-                      style={monogramStyle(r.id)}
-                    >
-                      {initial(r.name)}
-                    </span>
+                    <RelayLogo id={r.id} name={r.name} size={36} />
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center gap-1.5 truncate font-medium text-foreground">
                         {r.name}
@@ -168,6 +194,33 @@ export function ModelDetail({ model, catalog }: { model: Model; catalog: Catalog
           </ul>
         )}
       </div>
+    </div>
+  );
+}
+
+function KeySpec({
+  icon,
+  label,
+  value,
+  sub,
+  accent,
+}: {
+  icon?: React.ReactNode;
+  label: string;
+  value: string;
+  sub?: string;
+  accent?: boolean;
+}) {
+  return (
+    <div className="rounded-xl border border-border bg-card/50 p-4">
+      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        {icon}
+        {label}
+      </div>
+      <div className={`mt-1 text-xl font-bold tracking-tight ${accent ? "text-emerald-400" : "text-foreground"}`}>
+        {value}
+      </div>
+      {sub && <div className="mt-0.5 text-xs text-muted-foreground">{sub}</div>}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import type { CatalogJson, FreeQuotaType, Relay, RelayStatus } from "@/lib/types
 import { useApp } from "@/components/providers";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { monogramStyle, initial } from "@/lib/visual";
+import { ProviderLogo, RelayLogo } from "@/components/logo";
 import type { DictKey } from "@/lib/i18n";
 
 const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warning"> = {
@@ -33,14 +33,9 @@ function RelayRow({ relay }: { relay: Relay }) {
 
   return (
     <li className="grid grid-cols-1 gap-3 px-4 py-3 transition-colors hover:bg-accent/40 md:grid-cols-[1.1fr_1.4fr_1.6fr_0.9fr_0.55fr_0.9fr] md:items-center md:gap-4">
-      {/* 中转站 */}
+      {/* 中转站：logo + 名字 */}
       <div className="flex min-w-0 items-center gap-3">
-        <span
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-base font-bold text-white"
-          style={monogramStyle(relay.id)}
-        >
-          {initial(relay.name)}
-        </span>
+        <RelayLogo id={relay.id} name={relay.name} size={40} />
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">
             <Link
@@ -77,15 +72,17 @@ function RelayRow({ relay }: { relay: Relay }) {
         <p className="line-clamp-2">{note ?? "—"}</p>
       </div>
 
-      {/* 支持厂商 */}
-      <div className="flex flex-wrap gap-1">
+      {/* 支持厂商（logo） */}
+      <div className="flex flex-wrap items-center gap-1.5">
         {providers.map((p) => (
-          <span
+          <Link
             key={p}
-            className="rounded bg-secondary px-1.5 py-0.5 text-xs capitalize text-secondary-foreground"
+            href={`/labs/${p}`}
+            title={p}
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card/60 transition-transform hover:scale-110"
           >
-            {p}
-          </span>
+            <ProviderLogo id={p} size={20} />
+          </Link>
         ))}
         {extra > 0 && (
           <span className="px-1 py-0.5 text-xs text-muted-foreground">+{extra}</span>

@@ -1,10 +1,11 @@
 import { getCatalog } from "@/lib/data";
-import { ModelList } from "@/components/model-list";
+import { RelayList } from "@/components/relay-list";
+import { PageHeader } from "@/components/page-header";
 import { JsonLd } from "@/components/json-ld";
 
 export default function Home() {
   const catalog = getCatalog();
-  const models = Object.values(catalog.models);
+  const relays = Object.values(catalog.api);
 
   const webSite = {
     "@context": "https://schema.org",
@@ -17,12 +18,12 @@ export default function Home() {
   const itemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "LLM 模型列表",
-    itemListElement: models.map((m, i) => ({
+    name: "中转站列表",
+    itemListElement: relays.map((r, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      name: m.name,
-      url: `https://models.jjc.fun/models/${m.id}`,
+      name: r.name,
+      url: `https://models.jjc.fun/relay/${r.id}`,
     })),
   };
 
@@ -30,7 +31,8 @@ export default function Home() {
     <main className="mx-auto max-w-[1600px] px-4 py-6">
       <JsonLd data={webSite} />
       <JsonLd data={itemList} />
-      <ModelList catalog={catalog} />
+      <PageHeader titleKey="nav.providers" descKey="site.tagline" />
+      <RelayList catalog={catalog} />
     </main>
   );
 }

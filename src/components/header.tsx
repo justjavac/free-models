@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 import type { DictKey } from "@/lib/i18n";
 
 const NAV: { href: string; key: DictKey }[] = [
-  { href: "/", key: "nav.models" },
-  { href: "/providers", key: "nav.providers" },
+  { href: "/", key: "nav.providers" },
+  { href: "/models", key: "nav.models" },
   { href: "/about", key: "nav.about" },
 ];
 
@@ -45,7 +45,7 @@ export function Header() {
   const onSearch = (e: FormEvent) => {
     e.preventDefault();
     const term = q.trim();
-    router.push(term ? `/?q=${encodeURIComponent(term)}` : "/");
+    router.push(term ? `/models?q=${encodeURIComponent(term)}` : "/models");
   };
 
   return (
