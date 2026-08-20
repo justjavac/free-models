@@ -67,4 +67,3 @@ next-env.d.ts
 /public/catalog.json
 /public/llms.txt
 /public/llms-full.txt
-/scripts/
