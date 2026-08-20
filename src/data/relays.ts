@@ -11,7 +11,51 @@ const m = (id: string, name: string, extra?: Partial<ModelRef>): ModelRef => ({
 });
 
 export const relays: Relay[] = [
-  // 1) AnyRouter
+  // 1) AgentRouter
+  {
+    id: "agentrouter",
+    name: "AgentRouter",
+    url: "https://agentrouter.org",
+    api: "https://agentrouter.org/v1",
+    npm: "@ai-sdk/openai-compatible",
+    env: ["AGENTROUTER_API_KEY"],
+    openai_compatible: true,
+    logo: "/logos/agentrouter.png",
+    auth: {
+      type: "oauth",
+      env: ["AGENTROUTER_API_KEY"],
+      signup: "https://agentrouter.org/register?aff=8YoD",
+    },
+    free_quota: {
+      available: true,
+      type: "credit",
+      amount: "注册送 $50 / 每日签到 $25",
+      amount_usd: 50,
+      notes: "只支持 LinuxDo 和 GitHub 注册。每日签到需要退出并重新登录。",
+    },
+    pricing: { model: "no_markup", notes: "按零售价计费。" },
+    features: ["openai_compatible", "github_login"],
+    providers: ["openai", "anthropic", "deepseek", "zhipu", "google", "qwen"],
+    model_count: 0,
+    region: ["global"],
+    status: "operational",
+    doc: "https://agentrouter.org/docs",
+    updated_at: "2026-08-20",
+    models: {
+      "openai/gpt-4o": m("openai/gpt-4o", "GPT-4o"),
+      "openai/gpt-4o-mini": m("openai/gpt-4o-mini", "GPT-4o mini"),
+      "anthropic/claude-sonnet-4": m("anthropic/claude-sonnet-4", "Claude Sonnet 4"),
+      "anthropic/claude-opus-4": m("anthropic/claude-opus-4", "Claude Opus 4"),
+      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
+      "deepseek/deepseek-reasoner": m("deepseek/deepseek-reasoner", "DeepSeek Reasoner"),
+      "zhipu/glm-4-plus": m("zhipu/glm-4-plus", "GLM-4 Plus"),
+      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
+      "google/gemini-2.5-flash": m("google/gemini-2.5-flash", "Gemini 2.5 Flash"),
+      "google/gemini-2.5-pro": m("google/gemini-2.5-pro", "Gemini 2.5 Pro"),
+    },
+  },
+
+  // 2) AnyRouter
   {
     id: "anyrouter",
     name: "AnyRouter",
@@ -57,50 +101,6 @@ export const relays: Relay[] = [
       "xai/grok-2": m("xai/grok-2", "Grok 2"),
       "meta/llama-3.1-70b": m("meta/llama-3.1-70b", "Llama 3.1 70B"),
       "mistral/mistral-large": m("mistral/mistral-large", "Mistral Large"),
-    },
-  },
-
-  // 2) AgentRouter
-  {
-    id: "agentrouter",
-    name: "AgentRouter",
-    url: "https://agentrouter.org",
-    api: "https://agentrouter.org/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["AGENTROUTER_API_KEY"],
-    openai_compatible: true,
-    logo: "/logos/agentrouter.png",
-    auth: {
-      type: "oauth",
-      env: ["AGENTROUTER_API_KEY"],
-      signup: "https://agentrouter.org/register?aff=8YoD",
-    },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "注册送 $50 / 每日签到 $25",
-      amount_usd: 50,
-      notes: "只支持 LinuxDo 和 GitHub 注册。每日签到需要退出并重新登录。",
-    },
-    pricing: { model: "no_markup", notes: "按零售价计费。" },
-    features: ["openai_compatible", "github_login"],
-    providers: ["openai", "anthropic", "deepseek", "zhipu", "google", "qwen"],
-    model_count: 0,
-    region: ["global"],
-    status: "operational",
-    doc: "https://agentrouter.org/docs",
-    updated_at: "2026-08-20",
-    models: {
-      "openai/gpt-4o": m("openai/gpt-4o", "GPT-4o"),
-      "openai/gpt-4o-mini": m("openai/gpt-4o-mini", "GPT-4o mini"),
-      "anthropic/claude-sonnet-4": m("anthropic/claude-sonnet-4", "Claude Sonnet 4"),
-      "anthropic/claude-opus-4": m("anthropic/claude-opus-4", "Claude Opus 4"),
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "deepseek/deepseek-reasoner": m("deepseek/deepseek-reasoner", "DeepSeek Reasoner"),
-      "zhipu/glm-4-plus": m("zhipu/glm-4-plus", "GLM-4 Plus"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-      "google/gemini-2.5-flash": m("google/gemini-2.5-flash", "Gemini 2.5 Flash"),
-      "google/gemini-2.5-pro": m("google/gemini-2.5-pro", "Gemini 2.5 Pro"),
     },
   },
 
