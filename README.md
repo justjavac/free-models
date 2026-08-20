@@ -1,40 +1,46 @@
 # 中转站免费额度库 (Relay Free-Quota DB)
 
-一个类似 [models.dev](https://github.com/anomalyco/models.dev) 的站点，但**只收录提供免费额度的 LLM 中转站 / 聚合网关**。
+一个类似 [models.dev](https://models.dev/) 的站点，但**只收录提供免费额度的 LLM 中转站 / 聚合网关**。用来帮你快速找到：哪个中转站可以免费白嫖额度、哪个模型能在哪些中转站免费使用。
 
-技术栈：Next.js 16（App Router）+ TypeScript + Tailwind CSS v4 + shadcn 风格组件，全站静态生成（SSG），中英双语，暗色默认。
+## 这里可以做什么
 
-## 特性
+- **找免费中转站**：只收录有免费档的服务（注册赠送、每日签到、部分模型免费、无限免费等），首页即可对比各家的免费额度与赠送幅度。
+- **按模型查免费渠道**：在模型库搜任意模型（如 DeepSeek、Kimi、Qwen、Claude、GPT…），一键看它能在哪些中转站免费使用。
+- **看完整规格**：每个模型都给出上下文、输出上限、推理 / 工具调用 / 结构化输出、价格等，对齐 models.dev 的风格。
 
-- **免费额度导向**：仅收录有免费档的中转站（AnyRouter、AgentRouter、硅基流动、PPIO、ModelScope、Groq、Cloudflare AI…），标注免费类型（赠送额度 / token / 每日签到 / 部分免费 / 无限）。
-- **中转站列表（首页 `/`）**：突出免费额度与说明，支持厂商（logo）、模型数与一键注册。
-- **模型库**（`/models`）：对齐 models.dev 的模型表格——上下文 / 输出长度 / 推理 / 工具调用 / 开放权重 / 价格，默认按发布日期倒序，行内复制模型 ID。
-- **模型详情页**（`/models/{provider}/{slug}`）：完整规格（上下文、输出、多模态、价格、发布日期）+ 可免费使用的中转站列表。
-- **厂商页**（`/labs/[id]`）：每个模型厂商的独立页，列出其全部模型。
-- **中转站详情页**（`/relay/[id]`）：免费额度明细、模型表与一键复制注册链接。
-- **开放数据端点**（形状对齐 models.dev，构建期静态生成，可被 `curl` 直接取数）：
-  - `GET /api.json` —— 按中转站 id 为键
-  - `GET /models.json` —— 按模型 id 为键
-  - `GET /catalog.json` —— 二者合并
-  - 均带 `Cache-Control`（JSON 端点 `max-age=3600, s-maxage=86400`；llms 文本 `max-age=86400`）
-- **SEO 友好**：JSON-LD 结构化数据（WebSite / ItemList / BreadcrumbList）、自动生成的 OG/Twitter 品牌图（1200×630）、canonical、sitemap、robots。
-- **LLM 友好**：`GET /llms.txt` 与 `GET /llms-full.txt`（[llms.txt 规范](https://llmstxt.org)）供 LLM / AI 工具读取站点索引与全量数据。
-- **高性能**：全站 SSG，前端仅内存检索，无后端请求。
+## 页面导航
 
-## 数据来源
+| 页面 | 说明 |
+| --- | --- |
+| 首页 `/` | 全部中转站列表，突出免费额度与说明，可一键注册 |
+| 模型库 `/models` | 全部模型规格表格，支持关键词搜索、按发布日期排序 |
+| 模型详情 `/models/{厂商}/{模型}` | 单个模型的完整规格 + 可免费使用的中转站 |
+| 厂商页 `/labs/{厂商}` | 某厂商（如 Anthropic、DeepSeek…）下全部模型 |
+| 中转站详情 `/relay/{站点}` | 该站免费额度明细、支持的模型与注册入口 |
+| 关于 `/about` | 站点说明与收录标准 |
 
-数据集中在 `src/data/`（详见 [CONTRIBUTING.md](./CONTRIBUTING.md)）：`relays.ts` 为中转站，`models.ts` 为模型规格（含 `max_output`、`price`、`reasoning`、`open_weights` 等）。`model_count` 与模型 `available_on` 由 `src/lib/data.ts` 在构建期自动计算；JSON 与 LLM 文本端点由 `src/app/*/route.ts` 路由静态生成（`src/lib/llms.ts` 负责 llms 文本），无需手动同步。
+中英双语、暗色默认，全站静态生成，打开即用，无需登录。
 
-## 本地开发
+## 数据端点（可编程取用）
 
-```bash
-npm install
-npm run dev      # 启动开发服务器 → http://localhost:3000
-npm run lint     # ESLint 检查
-npm run build    # 生产构建（输出 SSG 静态页 + 数据端点）
-npm run start    # 运行生产构建
+数据以静态 JSON 开放，形状对齐 models.dev，可直接用 `curl` 拉取：
+
+```
+curl https://models.jjc.fun/api.json        # 按中转站 id 为键
+curl https://models.jjc.fun/models.json     # 按模型 id 为键
+curl https://models.jjc.fun/catalog.json    # 二者合并，一次拉全
 ```
 
-## 部署
+接口带一年不可变缓存头，适合被其他工具 / 脚本消费。
 
-标准 Next.js 项目，可直接部署到 Vercel（导入仓库即可，`npm run build` 会同时生成数据端点）。站点级配置（源码仓库地址等）见 `src/lib/site.ts`。
+### 厂商 Logo
+
+供应商 logo 使用 [models.dev](https://models.dev/) 官方提供的 SVG（`https://models.dev/logos/{provider}.svg`，如 `anthropic`、`openai`、`google`），找不到时自动回退为首字母标识。
+
+## 给 AI / LLM 工具使用
+
+- `/llms.txt` 与 `/llms-full.txt`（见 [llms.txt](https://llmstxt.org) 规范）为 LLM / AI 代理提供站点索引与全量数据，方便大模型直接读取。
+
+## 技术栈
+
+Next.js + TypeScript + Tailwind CSS + shadcn 风格组件，静态生成（SSG），前端仅内存检索，无后端请求。
