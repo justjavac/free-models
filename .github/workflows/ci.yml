@@ -15,10 +15,13 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Generate JSON & type-check / build
+      - name: Build (SSG + route handlers)
         run: npm run build
-      - name: Verify JSON endpoints exist
+      - name: Verify static route endpoints are prerendered
         run: |
-          test -f public/api.json
-          test -f public/models.json
-          test -f public/catalog.json
+          test -f .next/server/app/catalog.json.body
+          test -f .next/server/app/api.json.body
+          test -f .next/server/app/models.json.body
+          test -f .next/server/app/llms.txt.body
+          test -f .next/server/app/llms-full.txt.body
+          grep -q '"groq"' .next/server/app/api.json.body

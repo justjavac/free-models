@@ -39,6 +39,24 @@ yarn-error.log*
 # WorkBuddy project memory (internal, not source)
 .workbuddy/
 
+# AI agent / IDE 临时目录（配置、会话、缓存均不入库）
+.claude/
+.cursor/
+.windsurf/
+.codeium/
+.continue/
+.roo/
+.copilot/
+.aider/
+.aider*
+.gemini/
+.codex/
+.amp/
+.harness/
+.cursorrules
+.claudeignore
+.github/copilot/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
