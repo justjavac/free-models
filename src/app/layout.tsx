@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppProvider } from "@/components/providers";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://models.jjc.fun"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "中转站免费额度库 · Relay Free-Quota DB",
     template: "%s · Relay Free-Quota DB",

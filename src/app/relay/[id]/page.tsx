@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCatalog, getRelay, getRelays } from "@/lib/data";
 import { RelayDetail } from "@/components/relay-detail";
 import { JsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return getRelays().map((r) => ({ id: r.id }));
@@ -10,7 +11,7 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-const BASE = "https://models.jjc.fun";
+const BASE = SITE_URL;
 
 export async function generateMetadata({
   params,

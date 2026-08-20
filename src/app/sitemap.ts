@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { getCatalog, getRelays } from "@/lib/data";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://models.jjc.fun";
+  const base = SITE_URL;
   const relays = getRelays().map((r) => ({
     url: `${base}/relay/${r.id}`,
     lastModified: r.updated_at,

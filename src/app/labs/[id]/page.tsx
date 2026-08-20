@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCatalog } from "@/lib/data";
 import { LabDetail } from "@/components/lab-detail";
 import { JsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   const catalog = getCatalog();
@@ -23,7 +24,7 @@ export async function generateMetadata({
   return {
     title: id,
     description: `${id} 的模型列表与可免费使用的中转站。`,
-    alternates: { canonical: `https://models.jjc.fun/labs/${id}` },
+    alternates: { canonical: `${SITE_URL}/labs/${id}` },
   };
 }
 
@@ -37,12 +38,12 @@ export default async function LabPage({ params }: { params: Promise<{ id: string
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "模型库", item: "https://models.jjc.fun/models" },
+      { "@type": "ListItem", position: 1, name: "模型库", item: `${SITE_URL}/models` },
       {
         "@type": "ListItem",
         position: 2,
         name: id,
-        item: `https://models.jjc.fun/labs/${id}`,
+        item: `${SITE_URL}/labs/${id}`,
       },
     ],
   };

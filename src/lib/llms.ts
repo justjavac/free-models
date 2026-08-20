@@ -2,8 +2,9 @@
 // 由 /llms.txt、/llms-full.txt 路由调用，构建期静态化；不再依赖 public 静态文件。
 
 import type { CatalogJson, Relay } from "@/lib/types";
+import { SITE_URL } from "@/lib/site";
 
-const BASE = "https://models.jjc.fun";
+const BASE = SITE_URL;
 
 function freeText(r: Relay): string {
   const fq = r.free_quota;
@@ -22,9 +23,9 @@ export function generateLlms(catalog: CatalogJson): string {
   lines.push("");
   lines.push("## 页面");
   lines.push("");
-  lines.push("- [模型库](https://models.jjc.fun/)：全部模型规格（上下文/输出/推理/工具/权重/价格）与可免费使用的中转站");
-  lines.push("- [中转站（供应商）](https://models.jjc.fun/providers)：中转站列表（免费额度、说明）");
-  lines.push("- [关于](https://models.jjc.fun/about)：站点说明与数据端点文档");
+  lines.push(`- [模型库](${BASE}/)：全部模型规格（上下文/输出/推理/工具/权重/价格）与可免费使用的中转站`);
+  lines.push(`- [中转站（供应商）](${BASE}/providers)：中转站列表（免费额度、说明）`);
+  lines.push(`- [关于](${BASE}/about)：站点说明与数据端点文档`);
   lines.push("");
   lines.push("## 数据端点（JSON，可 GET）");
   lines.push("");

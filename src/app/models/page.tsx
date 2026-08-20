@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { getCatalog } from "@/lib/data";
 import { ModelList } from "@/components/model-list";
 import { JsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "模型库",
   description: "收录各中转站提供的模型规格，查看可在哪些中转站免费使用。",
+  alternates: { canonical: `${SITE_URL}/models` },
 };
 
 export default function ModelsPage() {
@@ -20,7 +22,7 @@ export default function ModelsPage() {
       "@type": "ListItem",
       position: i + 1,
       name: m.name,
-      url: `https://models.jjc.fun/models/${m.id}`,
+      url: `${SITE_URL}/models/${m.id}`,
     })),
   };
 

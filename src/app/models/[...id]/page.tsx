@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCatalog } from "@/lib/data";
 import { ModelDetail } from "@/components/model-detail";
 import { JsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return Object.keys(getCatalog().models).map((id) => ({ id: id.split("/") }));
@@ -20,7 +21,7 @@ export async function generateMetadata({
   return {
     title: model?.name ?? "模型",
     description: model?.description,
-    alternates: { canonical: `https://models.jjc.fun/models/${id.join("/")}` },
+    alternates: { canonical: `${SITE_URL}/models/${id.join("/")}` },
   };
 }
 
@@ -34,18 +35,18 @@ export default async function ModelPage({ params }: { params: Promise<{ id: stri
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "模型库", item: "https://models.jjc.fun/models" },
+      { "@type": "ListItem", position: 1, name: "模型库", item: `${SITE_URL}/models` },
       {
         "@type": "ListItem",
         position: 2,
         name: model.provider,
-        item: `https://models.jjc.fun/labs/${model.provider}`,
+        item: `${SITE_URL}/labs/${model.provider}`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: model.name,
-        item: `https://models.jjc.fun/models/${model.id}`,
+        item: `${SITE_URL}/models/${model.id}`,
       },
     ],
   };
