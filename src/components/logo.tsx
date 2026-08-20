@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import { hashHue, initial } from "@/lib/visual";
+import { cn } from "@/lib/utils";
 
 // 站点 Logo：路由/中转标记（两个输入节点汇向一个输出节点），
 // 用品牌色 --brand 填充（与 favicon 一致），不随主题反色。
@@ -117,7 +118,7 @@ function LogoBox({
   );
 }
 
-/** 厂商 logo（如 openai / anthropic / google ...） */
+/** 厂商 logo：优先使用 models.dev 的供应商 SVG（https://models.dev/logos/{id}.svg），失败回退首字母标识 */
 export function ProviderLogo({
   id,
   size = 20,
@@ -127,6 +128,24 @@ export function ProviderLogo({
   size?: number;
   className?: string;
 }) {
+  const [failed, setFailed] = useState(false);
+
+  if (!failed) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`https://models.dev/logos/${id}.svg`}
+        alt={id}
+        width={size}
+        height={size}
+        loading="lazy"
+        onError={() => setFailed(true)}
+        className={cn("object-contain dark:invert", className)}
+        style={{ flexShrink: 0, width: size, height: size }}
+      />
+    );
+  }
+
   return (
     <LogoBox id={id} ch={initial(id)} size={size} className={className} radius={9} fontSize={19} />
   );
