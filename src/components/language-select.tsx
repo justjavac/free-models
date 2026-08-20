@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Check, Globe } from "lucide-react";
+import { Check, Languages } from "lucide-react";
 import { useApp } from "@/components/providers";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/lib/i18n";
@@ -45,7 +45,7 @@ export function LanguageSelect() {
         aria-label={t("nav.language")}
         title={t(current.labelKey)}
       >
-        <Globe className="h-4 w-4" />
+        <Languages className="h-4 w-4" />
       </button>
 
       {open && (
