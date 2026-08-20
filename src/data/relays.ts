@@ -104,7 +104,109 @@ export const relays: Relay[] = [
     },
   },
 
-  // 3) 硅基流动 SiliconFlow
+  // 3) 魔塔社区 ModelScope
+  {
+    id: "modelscope",
+    name: "魔塔社区 ModelScope",
+    url: "https://modelscope.cn",
+    api: "https://api.modelscope.cn/v1",
+    npm: "@ai-sdk/openai-compatible",
+    env: ["MODELSCOPE_API_KEY"],
+    openai_compatible: true,
+    logo: "https://modelscope.cn/favicon.ico",
+    auth: {
+      type: "api_key",
+      env: ["MODELSCOPE_API_KEY"],
+      signup: "https://modelscope.cn/register?inviteCode=justjavac&invitorName=justjavac",
+    },
+    free_quota: {
+      available: true,
+      type: "credit",
+      amount: "注册和每日登录送 200 积分",
+      notes: "做社区任务可以获得更多积分。",
+    },
+    pricing: { model: "free" },
+    features: ["openai_compatible", "cn_region"],
+    providers: ["deepseek", "qwen", "llama", "glm"],
+    model_count: 0,
+    region: ["cn", "global"],
+    status: "operational",
+    updated_at: "2026-08-20",
+    models: {
+      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
+      "qwen/qwen2.5-72b-instruct": m("qwen/qwen2.5-72b-instruct", "Qwen2.5-72B"),
+      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
+      "meta/llama-3.1-70b": m("meta/llama-3.1-70b", "Llama 3.1 70B"),
+      "zhipu/glm-4-flash": m("zhipu/glm-4-flash", "GLM-4 Flash"),
+    },
+  },
+
+  // 4) TraeWork AI —— AI 编程工作台（邀请制，需核实额度）
+  {
+    id: "traework",
+    name: "TraeWork AI",
+    url: "https://www.trae.cn",
+    api: "https://www.trae.cn",
+    npm: "@ai-sdk/openai-compatible",
+    env: ["TRAEWORK_API_KEY"],
+    openai_compatible: true,
+    logo: "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png",
+    auth: {
+      type: "api_key",
+      env: ["TRAEWORK_API_KEY"],
+      signup:
+        "https://www.trae.cn/work-fission/WM6XUZKT444K?utm_source=copy_link&utm_medium=friends_invite",
+    },
+    free_quota: {
+      available: true,
+      type: "credit",
+      amount: "邀请注册送额度（需核实具体数额）",
+      amount_usd: 1,
+      notes: "AI 编程工作台；邀请链接注册，免费额度以官方为准。",
+    },
+    pricing: { model: "retail" },
+    features: ["ai_coding"],
+    providers: ["deepseek", "qwen", "openai"],
+    model_count: 0,
+    region: ["cn", "global"],
+    status: "operational",
+    updated_at: "2026-08-20",
+    models: {},
+  },
+
+  // 5) WorkBuddy —— AI 助手（邀请制，需核实额度）
+  {
+    id: "workbuddy",
+    name: "WorkBuddy",
+    url: "https://www.workbuddy.cn",
+    api: "https://www.workbuddy.cn",
+    npm: "@ai-sdk/openai-compatible",
+    env: ["WORKBUDDY_API_KEY"],
+    openai_compatible: true,
+    logo: "https://download.codebuddy.cn/web/workbuddy/17a05ee8a0595055ccacbb4e14a553c5d59069d6/assets/logo.svg",
+    auth: {
+      type: "api_key",
+      env: ["WORKBUDDY_API_KEY"],
+      signup: "https://www.workbuddy.cn/events/invite?inviteCode=yv0o6ubp3mqg",
+    },
+    free_quota: {
+      available: true,
+      type: "credit",
+      amount: "邀请注册送额度（需核实具体数额）",
+      amount_usd: 1,
+      notes: "AI 智能助手；邀请码注册，免费额度以官方为准。",
+    },
+    pricing: { model: "retail" },
+    features: ["ai_assistant"],
+    providers: ["deepseek", "qwen", "openai"],
+    model_count: 0,
+    region: ["cn", "global"],
+    status: "operational",
+    updated_at: "2026-08-20",
+    models: {},
+  },
+
+  // 6) 硅基流动 SiliconFlow
   {
     id: "siliconflow",
     name: "硅基流动 SiliconFlow",
@@ -143,7 +245,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 4) PPIO 派欧云
+  // 7) PPIO 派欧云
   {
     id: "ppio",
     name: "PPIO 派欧云",
@@ -177,7 +279,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 5) 唯一AI
+  // 8) 唯一AI
   {
     id: "aiionly",
     name: "唯一AI",
@@ -211,44 +313,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 6) 魔塔社区 ModelScope
-  {
-    id: "modelscope",
-    name: "魔塔社区 ModelScope",
-    url: "https://modelscope.cn",
-    api: "https://api.modelscope.cn/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["MODELSCOPE_API_KEY"],
-    openai_compatible: true,
-    logo: "https://modelscope.cn/favicon.ico",
-    auth: {
-      type: "api_key",
-      env: ["MODELSCOPE_API_KEY"],
-      signup: "https://modelscope.cn/register?inviteCode=justjavac&invitorName=justjavac",
-    },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "注册和每日登录送 200 积分",
-      notes: "做社区任务可以获得更多积分。",
-    },
-    pricing: { model: "free" },
-    features: ["openai_compatible", "cn_region"],
-    providers: ["deepseek", "qwen", "llama", "glm"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-20",
-    models: {
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "qwen/qwen2.5-72b-instruct": m("qwen/qwen2.5-72b-instruct", "Qwen2.5-72B"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-      "meta/llama-3.1-70b": m("meta/llama-3.1-70b", "Llama 3.1 70B"),
-      "zhipu/glm-4-flash": m("zhipu/glm-4-flash", "GLM-4 Flash"),
-    },
-  },
-
-  // 7) 小米 Mimo
+  // 9) 小米 Mimo
   {
     id: "xiaomi-mimo",
     name: "小米 Mimo 开放平台",
@@ -278,7 +343,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 8) NVIDIA MIM
+  // 10) NVIDIA MIM
   {
     id: "nvidia-mim",
     name: "NVIDIA MIM (build.nvidia.com)",
@@ -310,7 +375,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 9) Groq —— 免费层（部分开源模型不限量）
+  // 11) Groq —— 免费层（部分开源模型不限量）
   {
     id: "groq",
     name: "Groq",
@@ -341,7 +406,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 10) Cloudflare Workers AI —— 每日免费推理额度
+  // 12) Cloudflare Workers AI —— 每日免费推理额度
   {
     id: "cloudflare-ai",
     name: "Cloudflare Workers AI",
@@ -369,71 +434,6 @@ export const relays: Relay[] = [
       "meta/llama-3.1-8b": m("meta/llama-3.1-8b", "Llama 3.1 8B"),
       "qwen/qwen2.5-72b-instruct": m("qwen/qwen2.5-72b-instruct", "Qwen2.5-72B Instruct"),
     },
-  },
-
-  // 11) TraeWork AI —— AI 编程工作台（邀请制，需核实额度）
-  {
-    id: "traework",
-    name: "TraeWork AI",
-    url: "https://www.trae.cn",
-    api: "https://www.trae.cn",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["TRAEWORK_API_KEY"],
-    openai_compatible: true,
-    logo: "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png",
-    auth: {
-      type: "api_key",
-      env: ["TRAEWORK_API_KEY"],
-      signup:
-        "https://www.trae.cn/work-fission/WM6XUZKT444K?utm_source=copy_link&utm_medium=friends_invite",
-    },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "邀请注册送额度（需核实具体数额）",
-      amount_usd: 1,
-      notes: "AI 编程工作台；邀请链接注册，免费额度以官方为准。",
-    },
-    pricing: { model: "retail" },
-    features: ["ai_coding"],
-    providers: ["deepseek", "qwen", "openai"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-20",
-    models: {},
-  },
-
-  // 12) WorkBuddy —— AI 助手（邀请制，需核实额度）
-  {
-    id: "workbuddy",
-    name: "WorkBuddy",
-    url: "https://www.workbuddy.cn",
-    api: "https://www.workbuddy.cn",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["WORKBUDDY_API_KEY"],
-    openai_compatible: true,
-    logo: "https://download.codebuddy.cn/web/workbuddy/17a05ee8a0595055ccacbb4e14a553c5d59069d6/assets/logo.svg",
-    auth: {
-      type: "api_key",
-      env: ["WORKBUDDY_API_KEY"],
-      signup: "https://www.workbuddy.cn/events/invite?inviteCode=yv0o6ubp3mqg",
-    },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "邀请注册送额度（需核实具体数额）",
-      amount_usd: 1,
-      notes: "AI 智能助手；邀请码注册，免费额度以官方为准。",
-    },
-    pricing: { model: "retail" },
-    features: ["ai_assistant"],
-    providers: ["deepseek", "qwen", "openai"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-20",
-    models: {},
   },
 
   // 13) OpenCode —— 开源 AI 编码工具（需核实额度）
