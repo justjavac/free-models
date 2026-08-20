@@ -1,0 +1,126 @@
+name: 提交中转站 / Submit a relay
+description: 推荐一家提供免费额度的 LLM 中转站或聚合网关，供本站收录。
+title: "[relay] "
+labels: ["relay-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢推荐！请尽量填全以下信息，方便我们核对与收录。带 `*` 为必填。
+        收录标准见 About 页：只收「提供免费额度」的服务。数据会进入 `src/data/relays.ts`（及必要的 `src/data/models.ts`）。
+  - type: input
+    id: name
+    attributes:
+      label: 中转站名称 *
+      placeholder: 例如 AnyRouter
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: 官网地址 *
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: input
+    id: api
+    attributes:
+      label: API base 地址 *
+      description: OpenAI 兼容的 base URL，例如 https://example.com/v1
+      placeholder: https://example.com/v1
+    validations:
+      required: true
+  - type: dropdown
+    id: openai_compatible
+    attributes:
+      label: 是否 OpenAI 兼容 *
+      options:
+        - "是 (OpenAI-compatible)"
+        - "否"
+    validations:
+      required: true
+  - type: dropdown
+    id: free_type
+    attributes:
+      label: 免费额度类型 *
+      description: 详见 About 页收录标准。
+      options:
+        - "credit（注册赠送额度，如 $5）"
+        - "token（赠送 token）"
+        - "daily_checkin（每日签到）"
+        - "free_models（部分模型免费）"
+        - "unlimited（无限制免费）"
+    validations:
+      required: true
+  - type: input
+    id: amount
+    attributes:
+      label: 免费额度说明 *
+      description: 人类可读，例如「新用户赠送 $5」「每日 100 万 token」「部分模型永久免费」。
+      placeholder: 新用户赠送 $5
+    validations:
+      required: true
+  - type: input
+    id: amount_usd
+    attributes:
+      label: 折算美元金额（可选）
+      description: 用于排序，尽量填写，例如 5。
+      placeholder: "5"
+  - type: dropdown
+    id: pricing
+    attributes:
+      label: 计费方式
+      options:
+        - "no_markup（按官方原价）"
+        - "retail（零售价）"
+        - "markup（加价）"
+        - "free（完全免费）"
+        - "不确定 / 其他"
+  - type: input
+    id: auth_type
+    attributes:
+      label: 鉴权方式
+      description: api_key / oauth / 无需鉴权。
+      placeholder: api_key
+  - type: input
+    id: signup
+    attributes:
+      label: 注册 / 领取免费额度链接
+      placeholder: https://example.com/register
+  - type: input
+    id: doc
+    attributes:
+      label: 文档链接
+      placeholder: https://example.com/docs
+  - type: input
+    id: providers
+    attributes:
+      label: 支持厂商（逗号分隔）
+      description: 例如 openai, anthropic, google。
+      placeholder: openai, anthropic
+  - type: input
+    id: models
+    attributes:
+      label: 提供的模型（逗号分隔，可选）
+      description: 例如 openai/gpt-4o, anthropic/claude-3.5-sonnet。
+      placeholder: openai/gpt-4o
+  - type: dropdown
+    id: region
+    attributes:
+      label: 服务区域
+      options:
+        - "global（全球）"
+        - "cn（主要面向中国）"
+        - "both（两者皆可）"
+  - type: textarea
+    id: notes
+    attributes:
+      label: 补充说明 / 备注（可选）
+      placeholder: 任何需要维护者注意的信息，例如额度限制、有效期、是否需要绑卡等。
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 确认
+      options:
+        - label: 我确认该服务确实提供免费额度，且所填信息尽量准确。
+          required: true

@@ -2,6 +2,18 @@
 
 本站只收录**提供免费额度**的 LLM 中转站 / 聚合网关（OpenAI 兼容优先）。
 
+## 怎么贡献（两种方式）
+
+**方式一 · 免写代码（推荐普通用户）**
+不会写代码也能贡献：直接打开
+[「提交中转站」Issue 模板](https://github.com/justjavac/free-models/issues/new?template=submit-relay.yml)，
+按表单填好名称、官网、API 地址、免费额度类型与说明、支持厂商/模型等信息，提交即可。
+维护者会核对后录入 `src/data/relays.ts`（及必要的 `src/data/models.ts`）。
+
+**方式二 · 直接改数据提 PR（适合开发者）**
+按下方「数据来源」与字段模板，直接编辑 `src/data/relays.ts` / `src/data/models.ts` 并提交 PR，
+CI 会自动校验数据与构建。
+
 ## 数据来源
 
 所有数据集中在 `src/data/`：
