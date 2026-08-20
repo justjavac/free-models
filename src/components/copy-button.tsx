@@ -42,14 +42,14 @@ export function CopyButton({
         onClick={onCopy}
         aria-label={t("detail.copy")}
       >
-        {copied ? <Check className="text-emerald-400" /> : <Copy />}
+        {copied ? <Check className="text-emerald-600 dark:text-emerald-400" /> : <Copy />}
       </Button>
     );
   }
 
   return (
     <Button variant="outline" size="sm" className={className} onClick={onCopy}>
-      {copied ? <Check className="text-emerald-400" /> : <Copy />}
+      {copied ? <Check className="text-emerald-600 dark:text-emerald-400" /> : <Copy />}
       {copied ? t("detail.copied") : t("detail.copy")}
     </Button>
   );

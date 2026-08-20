@@ -11,14 +11,14 @@ const badgeVariants = cva(
         secondary: "border-transparent bg-secondary text-secondary-foreground",
         outline: "text-foreground",
         success:
-          "border-transparent bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-500/30",
+          "border-transparent bg-emerald-500/15 text-emerald-700 ring-1 ring-emerald-500/30 dark:text-emerald-400",
         warning:
-          "border-transparent bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/30",
-        info: "border-transparent bg-sky-500/15 text-sky-400 ring-1 ring-sky-500/30",
+          "border-transparent bg-amber-500/15 text-amber-700 ring-1 ring-amber-500/30 dark:text-amber-400",
+        info: "border-transparent bg-sky-500/15 text-sky-700 ring-1 ring-sky-500/30 dark:text-sky-400",
         purple:
-          "border-transparent bg-violet-500/15 text-violet-400 ring-1 ring-violet-500/30",
+          "border-transparent bg-violet-500/15 text-violet-700 ring-1 ring-violet-500/30 dark:text-violet-400",
         destructive:
-          "border-transparent bg-destructive/15 text-destructive ring-1 ring-destructive/30",
+          "border-transparent bg-destructive/15 text-red-700 ring-1 ring-destructive/30 dark:text-destructive",
       },
     },
     defaultVariants: { variant: "default" },
