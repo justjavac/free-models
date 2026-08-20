@@ -112,6 +112,8 @@ export const dictionaries = {
     "providers.relays": "中转站",
     "providers.notes": "说明",
     "labs.back": "返回供应商页",
+    "submitRelay": "提交中转站",
+    "home.submitHint": "知道一家有免费额度的中转站？欢迎提交。",
   },
   en: {
     "site.title": "Relay Free-Quota DB",
@@ -222,6 +224,8 @@ export const dictionaries = {
     "providers.relays": "Relays",
     "providers.notes": "Notes",
     "labs.back": "Back to providers",
+    "submitRelay": "Submit relay",
+    "home.submitHint": "Know a relay with free quota? Submit it.",
   },
 } as const;
 

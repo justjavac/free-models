@@ -5,6 +5,7 @@ import { GithubIcon } from "@/components/github-icon";
 import { REPO_URL, SITE_URL } from "@/lib/site";
 import { useApp } from "@/components/providers";
 import { CopyButton } from "@/components/copy-button";
+import { SubmitRelayButton } from "@/components/submit-relay-button";
 import type { DictKey } from "@/lib/i18n";
 import { Target, Database, Box, Layers, HandHeart, Scale } from "lucide-react";
 
@@ -83,6 +84,7 @@ export function AboutContent({
             </li>
           ))}
         </ol>
+        <SubmitRelayButton className="mt-4" />
       </section>
 
       {/* 开源 */}

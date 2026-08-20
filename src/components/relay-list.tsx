@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ProviderLogo, RelayLogo } from "@/components/logo";
 import { FREE_VARIANT } from "@/lib/ui";
 import { cn } from "@/lib/utils";
+import { SubmitRelayButton } from "@/components/submit-relay-button";
 import type { DictKey } from "@/lib/i18n";
 
 /** 中转站列表行：桌面为表格行，移动端为卡片 */
@@ -111,7 +112,12 @@ export function RelayList({ catalog }: { catalog: CatalogJson }) {
   const relays = Object.values(catalog.api);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
+    <>
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <p className="text-sm text-muted-foreground">{t("home.submitHint")}</p>
+        <SubmitRelayButton />
+      </div>
+      <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
       <div className="hidden border-b border-border bg-card/80 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground md:grid md:grid-cols-[1.2fr_1.3fr_1.5fr_1fr_0.6fr_1fr] md:gap-4">
         <span>{t("providers.relays")}</span>
         <span>{t("card.free")}</span>
@@ -125,6 +131,7 @@ export function RelayList({ catalog }: { catalog: CatalogJson }) {
           <RelayRow key={r.id} relay={r} />
         ))}
       </ul>
-    </div>
+      </div>
+    </>
   );
 }

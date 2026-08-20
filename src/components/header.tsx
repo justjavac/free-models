@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { LanguageSelect } from "@/components/language-select";
 import { GithubIcon } from "@/components/github-icon";
+import { SubmitRelayButton } from "@/components/submit-relay-button";
 import { REPO_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import type { DictKey } from "@/lib/i18n";
@@ -114,6 +115,8 @@ export function Header() {
               <GithubIcon className="h-4 w-4" />
             </a>
           </Button>
+
+          <SubmitRelayButton iconOnly className="hidden h-11 w-11 sm:inline-flex" />
 
           <Button
             variant="ghost"
