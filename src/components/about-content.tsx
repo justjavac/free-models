@@ -100,7 +100,7 @@ export function AboutContent({
             className="inline-flex items-center gap-1.5 font-medium text-foreground hover:underline"
           >
             <GithubIcon className="h-4 w-4" />
-            relaydb
+            free-models
           </a>
         </p>
       </section>
