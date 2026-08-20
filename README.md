@@ -6,17 +6,17 @@
 
 ## 特性
 
-- **免费额度导向**：仅收录有免费档的中转站（AnyRouter、AgentRouter、硅基流动、OpenRouter、火山方舟…），标注免费类型（赠送额度 / token / 每日签到 / 部分免费 / 无限）。
-- **模型库**（`/`）：对齐 models.dev 的模型表格——上下文 / 输出长度 / 推理 / 工具调用 / 开放权重 / 价格，默认按发布日期倒序，行内复制模型 ID。
+- **免费额度导向**：仅收录有免费档的中转站（AnyRouter、AgentRouter、硅基流动、PPIO、ModelScope、Groq、Cloudflare AI…），标注免费类型（赠送额度 / token / 每日签到 / 部分免费 / 无限）。
+- **中转站列表（首页 `/`）**：突出免费额度与说明，支持厂商（logo）、模型数与一键注册。
+- **模型库**（`/models`）：对齐 models.dev 的模型表格——上下文 / 输出长度 / 推理 / 工具调用 / 开放权重 / 价格，默认按发布日期倒序，行内复制模型 ID。
 - **模型详情页**（`/models/{provider}/{slug}`）：完整规格（上下文、输出、多模态、价格、发布日期）+ 可免费使用的中转站列表。
 - **厂商页**（`/labs/[id]`）：每个模型厂商的独立页，列出其全部模型。
-- **中转站（供应商）页**（`/providers`）：中转站列表，突出免费额度与说明。
-- **中转站详情页**（`/relay/[id]`）：规格、免费额度明细、模型表、一键复制 API 地址。
+- **中转站详情页**（`/relay/[id]`）：免费额度明细、模型表与一键复制注册链接。
 - **开放数据端点**（形状对齐 models.dev，构建期静态生成，可被 `curl` 直接取数）：
   - `GET /api.json` —— 按中转站 id 为键
   - `GET /models.json` —— 按模型 id 为键
   - `GET /catalog.json` —— 二者合并
-  - 均带 `Cache-Control: public, max-age=31536000, immutable`
+  - 均带 `Cache-Control`（JSON 端点 `max-age=3600, s-maxage=86400`；llms 文本 `max-age=86400`）
 - **SEO 友好**：JSON-LD 结构化数据（WebSite / ItemList / BreadcrumbList）、自动生成的 OG/Twitter 品牌图（1200×630）、canonical、sitemap、robots。
 - **LLM 友好**：`GET /llms.txt` 与 `GET /llms-full.txt`（[llms.txt 规范](https://llmstxt.org)）供 LLM / AI 工具读取站点索引与全量数据。
 - **高性能**：全站 SSG，前端仅内存检索，无后端请求。

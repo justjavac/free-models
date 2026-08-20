@@ -19,7 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
   return [
     { url: base, lastModified: new Date().toISOString() },
-    { url: `${base}/providers`, lastModified: new Date().toISOString() },
     { url: `${base}/about`, lastModified: new Date().toISOString() },
     ...relays,
     ...models,

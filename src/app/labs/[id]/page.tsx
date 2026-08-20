@@ -21,8 +21,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   return {
-    title: `${id} · Relay Free-Quota DB`,
+    title: id,
     description: `${id} 的模型列表与可免费使用的中转站。`,
+    alternates: { canonical: `https://models.jjc.fun/labs/${id}` },
   };
 }
 
@@ -36,7 +37,7 @@ export default async function LabPage({ params }: { params: Promise<{ id: string
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "模型库", item: "https://models.jjc.fun/" },
+      { "@type": "ListItem", position: 1, name: "模型库", item: "https://models.jjc.fun/models" },
       {
         "@type": "ListItem",
         position: 2,

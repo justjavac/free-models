@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/page-header";
 import { AboutContent } from "@/components/about-content";
 
 export const metadata: Metadata = {
-  title: "关于 · Relay Free-Quota DB",
+  title: "关于",
   description: "关于本站：只收录提供免费额度的 LLM 中转站与聚合网关，数据以 JSON 开放。",
 };
 

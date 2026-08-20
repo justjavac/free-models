@@ -31,7 +31,7 @@ export function serializeApi(catalog: CatalogJson): ApiJson {
       ...r,
       // models.dev 顶层用 env 数组（本站权威值在 auth.env）
       env: r.env?.length ? r.env : r.auth.env,
-      models: models as never,
+      models: models as Record<string, Model>,
     };
   }
   return out;

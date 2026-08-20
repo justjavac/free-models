@@ -4,12 +4,13 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // 三套 JSON 端点：长期不可变缓存，便于 curl 直取与 CDN 边缘缓存
+        // JSON 数据端点：免费额度/价格会更新，不宜永久缓存。
+        // 用较短 max-age，并保留 CDN 边缘缓存（s-maxage）。
         source: "/:file(api|models|catalog).json",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=3600, s-maxage=86400",
           },
         ],
       },
@@ -18,7 +19,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=86400, s-maxage=86400",
           },
         ],
       },
@@ -27,7 +28,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=86400, s-maxage=86400",
           },
         ],
       },

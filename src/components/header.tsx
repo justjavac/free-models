@@ -81,6 +81,7 @@ export function Header() {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder={t("nav.search")}
+              aria-label={t("nav.search")}
               className="h-9 w-56 rounded-md border border-border bg-transparent pl-8 pr-2 text-sm text-foreground placeholder:text-muted-foreground transition-all focus:w-72 focus:outline-none focus:ring-1 focus:ring-ring"
             />
           </form>

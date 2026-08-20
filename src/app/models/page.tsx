@@ -4,7 +4,7 @@ import { ModelList } from "@/components/model-list";
 import { JsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
-  title: "模型库 · Relay Free-Quota DB",
+  title: "模型库",
   description: "收录各中转站提供的模型规格，查看可在哪些中转站免费使用。",
 };
 

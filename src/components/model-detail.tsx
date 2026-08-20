@@ -3,22 +3,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, Copy, Check, ExternalLink, Layers, Zap } from "lucide-react";
-import type { CatalogJson, FreeQuotaType, Model } from "@/lib/types";
+import type { CatalogJson, Model } from "@/lib/types";
 import { useApp } from "@/components/providers";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ProviderLogo, RelayLogo } from "@/components/logo";
 import { formatTokens } from "@/lib/format";
+import { FREE_VARIANT } from "@/lib/ui";
 import type { DictKey } from "@/lib/i18n";
-
-const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warning"> = {
-  credit: "success",
-  token: "info",
-  daily_checkin: "purple",
-  free_models: "warning",
-  unlimited: "success",
-};
 
 function fmtPrice(n?: number): string {
   return n === undefined ? "?" : n.toFixed(2);

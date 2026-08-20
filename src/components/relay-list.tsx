@@ -6,15 +6,8 @@ import { useApp } from "@/components/providers";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProviderLogo, RelayLogo } from "@/components/logo";
+import { FREE_VARIANT } from "@/lib/ui";
 import type { DictKey } from "@/lib/i18n";
-
-const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warning"> = {
-  credit: "success",
-  token: "info",
-  daily_checkin: "purple",
-  free_models: "warning",
-  unlimited: "success",
-};
 
 /** 中转站列表行：重点突出免费额度与说明 */
 function RelayRow({ relay }: { relay: Relay }) {

@@ -8,15 +8,8 @@ import { CopyButton } from "@/components/copy-button";
 import { useApp } from "@/components/providers";
 import { RelayLogo } from "@/components/logo";
 import { formatTokens } from "@/lib/format";
+import { FREE_VARIANT } from "@/lib/ui";
 import type { DictKey } from "@/lib/i18n";
-
-const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warning"> = {
-  credit: "success",
-  token: "info",
-  daily_checkin: "purple",
-  free_models: "warning",
-  unlimited: "success",
-};
 
 export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: CatalogJson }) {
   const { t, locale } = useApp();
@@ -89,15 +82,15 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
           <table className="w-full text-sm">
             <thead className="bg-muted/40 text-left text-xs text-muted-foreground">
               <tr>
-                <th className="px-3 py-1.5 font-medium">{t("detail.modelName")}</th>
-                <th className="px-3 py-1.5 font-medium">ID</th>
-                <th className="px-3 py-1.5 font-medium">{t("models.context")}</th>
-                <th className="px-3 py-1.5 font-medium">{t("models.maxOutput")}</th>
-                <th className="px-3 py-1.5 font-medium">{t("detail.price")}</th>
-                <th className="px-3 py-1.5 font-medium">{t("models.reasoning")}</th>
-                <th className="px-3 py-1.5 font-medium">{t("models.toolCall")}</th>
-                <th className="px-3 py-1.5 font-medium">{t("models.structured")}</th>
-                <th className="px-3 py-1.5 font-medium">{t("detail.availableOn")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("detail.modelName")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">ID</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("models.context")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("models.maxOutput")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("detail.price")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("models.reasoning")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("models.toolCall")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("models.structured")}</th>
+                <th scope="col" className="px-3 py-1.5 font-medium">{t("detail.availableOn")}</th>
               </tr>
             </thead>
             <tbody>

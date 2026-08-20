@@ -18,8 +18,9 @@ export async function generateMetadata({
   const { id } = await params;
   const model = getCatalog().models[id.join("/")];
   return {
-    title: model ? `${model.name} · Relay Free-Quota DB` : "模型 · Relay Free-Quota DB",
+    title: model?.name ?? "模型",
     description: model?.description,
+    alternates: { canonical: `https://models.jjc.fun/models/${id.join("/")}` },
   };
 }
 
@@ -33,7 +34,7 @@ export default async function ModelPage({ params }: { params: Promise<{ id: stri
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "模型库", item: "https://models.jjc.fun/" },
+      { "@type": "ListItem", position: 1, name: "模型库", item: "https://models.jjc.fun/models" },
       {
         "@type": "ListItem",
         position: 2,
