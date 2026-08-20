@@ -8,7 +8,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Project: Relay Free-Quota DB (models.jjc.fun)
+# Project: Relay Free-Quota DB (models.denohub.com)
 
 A static, bilingual (zh/en, dark-mode by default) Next.js site that catalogs LLM relay/gateway providers that offer a **free tier**. Modeled after [models.dev](https://models.dev/); data shapes are isomorphic to its `api.json` / `models.json` / `catalog.json`.
 

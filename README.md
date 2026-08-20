@@ -13,9 +13,9 @@
 数据以静态 JSON 开放，可直接用 `curl` 拉取：
 
 ```
-curl https://models.jjc.fun/api.json        # 按中转站 id 为键
-curl https://models.jjc.fun/models.json     # 按模型 id 为键
-curl https://models.jjc.fun/catalog.json    # 二者合并，一次拉全
+curl https://models.denohub.com/api.json        # 按中转站 id 为键
+curl https://models.denohub.com/models.json     # 按模型 id 为键
+curl https://models.denohub.com/catalog.json    # 二者合并，一次拉全
 ```
 
 这些 JSON 为每次部署时静态生成、随构建更新，采用短时缓存（JSON 浏览器 1h / CDN 边缘 1d，llms 短时 1d），适合被其他工具 / 脚本消费。
