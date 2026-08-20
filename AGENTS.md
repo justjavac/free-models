@@ -63,7 +63,7 @@ Mirrors models.dev. Top-level objects are keyed by id; models nest under relays.
 
 ## Convention notes / gotchas
 
-- Provider logos are vendored locally as single-path, `currentColor` SVG path data in `src/components/provider-logos.tsx`, rendered inline by `src/components/logo.tsx`; providers not in that map fall back to a letter monogram. No `devicon`/`simple-icons`/image deps and no external logo requests.
+- Provider logos are vendored locally as single-path, `currentColor` SVG path data in `src/components/provider-logos.tsx`, rendered inline by `src/components/logo.tsx`; providers not in that map fall back to a letter monogram. Relay logos are vendored file assets under `public/logos/{relay.id}.{png|svg|ico}`, referenced via local `logo` paths (never external URLs); a relay without a `logo` falls back to a brand-color monogram. No `devicon`/`simple-icons`/image deps and no external logo requests.
 - New UI copy: keep zh + en strings in `src/lib/i18n.ts` so nothing is hardcoded inline.
 - Only list a relay if it actually offers a free tier — see the About page's criteria.
 - Respect the `nextjs-agent-rules` block above: this Next.js version has breaking API changes; read `node_modules/next/dist/docs/` before writing Next-specific code.
