@@ -80,6 +80,7 @@ export function generateLlmsFull(catalog: CatalogJson): string {
     lines.push(`- 推理：${m.reasoning ? "是" : "否"}`);
     lines.push(`- 工具调用：${m.tool_call ? "是" : "否"}`);
     lines.push(`- 开放权重：${m.open_weights ? "是" : "否"}`);
+    lines.push(`- 结构化输出：${m.structured_output ? "是" : "否"}`);
     if (m.release_date) lines.push(`- 发布：${m.release_date}`);
     if (m.price) {
       lines.push(`- 价格（$/1M tokens）：输入 $${m.price.input ?? "?"}，输出 $${m.price.output ?? "?"}`);
@@ -94,8 +95,11 @@ export function generateLlmsFull(catalog: CatalogJson): string {
     lines.push(`- 官网：${r.url}`);
     lines.push(`- API：${r.api}`);
     lines.push(`- OpenAI 兼容：${r.openai_compatible ? "是" : "否"}`);
+    lines.push(`- 特性：${r.features.join(", ")}`);
+    if (r.doc) lines.push(`- 文档：${r.doc}`);
     lines.push(`- 免费额度：${freeText(r) || "—"}`);
     if (r.free_quota.notes) lines.push(`- 免费额度说明：${r.free_quota.notes}`);
+    lines.push(`- 注册 / 获取 Key：${r.auth.signup}`);
     lines.push(`- 计费：${r.pricing.notes ?? r.pricing.model}`);
     lines.push(`- 支持厂商：${r.providers.join(", ")}`);
     lines.push(`- 模型数：${r.model_count}`);
