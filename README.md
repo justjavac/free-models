@@ -18,7 +18,7 @@ curl https://models.jjc.fun/models.json     # 按模型 id 为键
 curl https://models.jjc.fun/catalog.json    # 二者合并，一次拉全
 ```
 
-这些 JSON 为每次部署时静态生成、随构建更新，不设长缓存，适合被其他工具 / 脚本消费。
+这些 JSON 为每次部署时静态生成、随构建更新，采用短时缓存（JSON 浏览器 1h / CDN 边缘 1d，llms 短时 1d），适合被其他工具 / 脚本消费。
 
 ## 给 AI / LLM 工具使用
 
