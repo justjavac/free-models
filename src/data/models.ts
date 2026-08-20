@@ -1,7 +1,7 @@
 import type { Model } from "../lib/types";
 
 // 共享模型目录：跨中转站复用的模型规格。
-// available_on 初始为空，由 scripts/generate.ts 扫描 relays 后自动填充。
+// available_on 初始为空，由构建期 src/lib/data.ts 按 relays 自动填充（见 AGENTS.md）。
 // 数据以公开资料整理（价格 = 官方每百万 token 美元价，输入/输出），
 // 部分规格可能随厂商更新而变化，请按需校正。
 
