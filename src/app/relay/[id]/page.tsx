@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCatalog, getRelay, getRelays } from "@/lib/data";
 import { RelayDetail } from "@/components/relay-detail";
 import { JsonLd } from "@/components/json-ld";
+import { relayOrgLd } from "@/lib/jsonld";
 import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -62,6 +63,7 @@ export default async function RelayPage({ params }: { params: Promise<{ id: stri
   return (
     <>
       <JsonLd data={breadcrumb} />
+      <JsonLd data={relayOrgLd(relay)} />
       <RelayDetail relay={relay} catalog={catalog} />
     </>
   );

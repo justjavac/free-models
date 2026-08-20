@@ -4,6 +4,9 @@ import "./globals.css";
 import { AppProvider } from "@/components/providers";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { JsonLd } from "@/components/json-ld";
+import { getCatalog } from "@/lib/data";
+import { datasetLd } from "@/lib/jsonld";
 import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
@@ -72,6 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <JsonLd data={datasetLd(getCatalog())} />
         <AppProvider>
           <Header />
           <div className="flex-1">{children}</div>
