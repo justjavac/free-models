@@ -21,8 +21,15 @@ export function LanguageSelect() {
     function onDoc(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
     document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
@@ -32,10 +39,10 @@ export function LanguageSelect() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="language"
+        aria-label={t("nav.language")}
         title={t(current.labelKey)}
       >
         <Globe className="h-4 w-4" />
@@ -44,6 +51,7 @@ export function LanguageSelect() {
       {open && (
         <div
           role="listbox"
+          aria-label={t("nav.language")}
           className="absolute right-0 z-50 mt-1 w-32 overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md"
         >
           {LOCALES.map((l) => (
@@ -57,7 +65,7 @@ export function LanguageSelect() {
                 setOpen(false);
               }}
               className={cn(
-                "flex w-full items-center justify-between px-3 py-2 text-sm hover:bg-accent",
+                "flex w-full items-center justify-between px-3 py-2 text-sm hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                 l.code === locale && "bg-accent font-medium",
               )}
             >
