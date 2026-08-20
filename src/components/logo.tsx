@@ -6,7 +6,6 @@
 
 import { useState } from "react";
 import { hashHue, initial } from "@/lib/visual";
-import { cn } from "@/lib/utils";
 import { PROVIDER_LOGOS } from "./provider-logos";
 
 // 站点 Logo：路由/中转标记（两个输入节点汇向一个输出节点），
@@ -144,7 +143,7 @@ export function ProviderLogo({
       aria-label={id}
       width={size}
       height={size}
-      className={cn("dark:invert", className)}
+      className={className}
       style={{ flexShrink: 0, width: size, height: size }}
     >
       <path d={d} />
