@@ -80,7 +80,7 @@ export const relays: Relay[] = [
       type: "credit",
       amount: "注册送 $50 / 每日签到 $25",
       amount_usd: 50,
-      notes: "只支持 LinuxDo 和 GitHub 注册。",
+      notes: "只支持 LinuxDo 和 GitHub 注册。每日签到需要退出并重新登录。",
     },
     pricing: { model: "no_markup", notes: "按零售价计费。" },
     features: ["openai_compatible", "github_login"],
@@ -113,6 +113,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["SILICONFLOW_API_KEY"],
     openai_compatible: true,
+    logo: "https://siliconflow.cn/favicon.ico",
     auth: { type: "api_key", env: ["SILICONFLOW_API_KEY"], signup: "https://cloud.siliconflow.cn/i/1jkLcMoK" },
     free_quota: {
       available: true,
@@ -151,6 +152,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["PPIO_API_KEY"],
     openai_compatible: true,
+    logo: "https://ppio.com/favicon.ico",
     auth: { type: "api_key", env: ["PPIO_API_KEY"], signup: "https://ppio.com/user/register?invited_by=6F996D" },
     free_quota: {
       available: true,
@@ -184,6 +186,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["AIONLY_API_KEY"],
     openai_compatible: true,
+    logo: "https://favicon.im/aiionly.com",
     auth: { type: "api_key", env: ["AIONLY_API_KEY"], signup: "https://www.aiionly.com" },
     free_quota: {
       available: true,
@@ -217,6 +220,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["MODELSCOPE_API_KEY"],
     openai_compatible: true,
+    logo: "https://modelscope.cn/favicon.ico",
     auth: {
       type: "api_key",
       env: ["MODELSCOPE_API_KEY"],
@@ -253,6 +257,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["XIAOMI_MIMO_API_KEY"],
     openai_compatible: true,
+    logo: "https://platform.xiaomimimo.com/favicon.ico",
     auth: { type: "api_key", env: ["XIAOMI_MIMO_API_KEY"], signup: "https://platform.xiaomimimo.com" },
     free_quota: {
       available: true,
@@ -282,6 +287,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["NVIDIA_API_KEY"],
     openai_compatible: true,
+    logo: "https://www.nvidia.com/favicon.ico",
     auth: { type: "api_key", env: ["NVIDIA_API_KEY"], signup: "https://build.nvidia.com" },
     free_quota: {
       available: true,
@@ -313,6 +319,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["GROQ_API_KEY"],
     openai_compatible: true,
+    logo: "https://groq.com/favicon.ico",
     auth: { type: "api_key", env: ["GROQ_API_KEY"], signup: "https://console.groq.com" },
     free_quota: {
       available: true,
@@ -343,6 +350,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["CLOUDFLARE_API_TOKEN"],
     openai_compatible: true,
+    logo: "https://dash.cloudflare.com/favicon.ico",
     auth: { type: "api_key", env: ["CLOUDFLARE_API_TOKEN"], signup: "https://dash.cloudflare.com/sign-up" },
     free_quota: {
       available: true,
@@ -372,6 +380,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["TRAEWORK_API_KEY"],
     openai_compatible: true,
+    logo: "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png",
     auth: {
       type: "api_key",
       env: ["TRAEWORK_API_KEY"],
@@ -404,6 +413,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["WORKBUDDY_API_KEY"],
     openai_compatible: true,
+    logo: "https://download.codebuddy.cn/web/workbuddy/17a05ee8a0595055ccacbb4e14a553c5d59069d6/assets/logo.svg",
     auth: {
       type: "api_key",
       env: ["WORKBUDDY_API_KEY"],
@@ -435,6 +445,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["OPENCODE_API_KEY"],
     openai_compatible: true,
+    logo: "https://opencode.ai/favicon.ico",
     auth: {
       type: "api_key",
       env: ["OPENCODE_API_KEY"],
