@@ -20,7 +20,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["ANYROUTER_API_KEY"],
     openai_compatible: true,
-    logo: "https://anyrouter.top/logo.png",
+    logo: "/anyrouter-logo.png",
     auth: {
       type: "api_key",
       env: ["ANYROUTER_API_KEY"],

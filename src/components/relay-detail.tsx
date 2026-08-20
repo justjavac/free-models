@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { CheckCircle2, Minus } from "lucide-react";
-import type { ReactNode } from "react";
 import type { CatalogJson, FreeQuotaType, Model, Relay } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { CopyButton } from "@/components/copy-button";
@@ -34,22 +33,15 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
         ← {t("detail.back")}
       </Link>
 
-      {/* 头部：logo + 名称 + id + 免费额度 badge + 操作 */}
+      {/* 头部：logo + 标题 + label + 操作 */}
       <header className="flex flex-wrap items-start gap-3">
         <RelayLogo id={relay.id} name={relay.name} size={48} logo={relay.logo} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-xl font-bold tracking-tight">{relay.name}</h1>
-            <span className="font-mono text-sm text-muted-foreground">{relay.id}</span>
             {fq.available && fType && (
               <Badge variant={FREE_VARIANT[fType]}>{t(`free.${fType}` as DictKey)}</Badge>
             )}
-          </div>
-          <div className="mt-0.5 flex flex-wrap items-center gap-x-3 text-xs text-muted-foreground">
-            <a href={relay.url} target="_blank" rel="noreferrer" className="hover:text-foreground">
-              {relay.url.replace(/^https?:\/\//, "")}
-            </a>
-            {relay.openai_compatible && <Badge variant="info" className="text-[10px]">OpenAI Compatible</Badge>}
           </div>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -64,33 +56,6 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
           </a>
         </div>
       </header>
-
-      {/* 统计条：去掉 API，保留 Models / Package / Docs */}
-      <section className="mt-4 grid grid-cols-3 gap-2">
-        <Stat label={locale === "zh" ? "收录模型" : "Models"} value={String(modelCount)} />
-        <Stat
-          label="Package"
-          value={relay.npm ?? "@ai-sdk/openai-compatible"}
-          mono
-        />
-        <Stat
-          label={t("card.doc")}
-          value={
-            relay.doc ? (
-              <a
-                href={relay.doc}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sky-400 underline hover:text-sky-300"
-              >
-                {locale === "zh" ? "文档" : "Docs"} ↗
-              </a>
-            ) : (
-              "—"
-            )
-          }
-        />
-      </section>
 
       {/* 免费额度 */}
       <section className="mt-4">
@@ -193,24 +158,5 @@ function ModelRow({ id, model }: { id: string; model?: Model }) {
         {model?.available_on.length ?? 0} {locale === "zh" ? "家" : ""}
       </td>
     </tr>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  mono,
-}: {
-  label: string;
-  value: ReactNode;
-  mono?: boolean;
-}) {
-  return (
-    <div className="rounded-lg border border-border bg-card/50 px-3 py-2">
-      <div className="text-[11px] text-muted-foreground">{label}</div>
-      <div className={`mt-0.5 truncate text-sm font-medium text-foreground ${mono ? "font-mono" : ""}`}>
-        {value}
-      </div>
-    </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { CatalogJson, FreeQuotaType, Relay, RelayStatus } from "@/lib/types";
+import type { CatalogJson, FreeQuotaType, Relay } from "@/lib/types";
 import { useApp } from "@/components/providers";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,12 +14,6 @@ const FREE_VARIANT: Record<FreeQuotaType, "success" | "info" | "purple" | "warni
   daily_checkin: "purple",
   free_models: "warning",
   unlimited: "success",
-};
-
-const STATUS_DOT: Record<RelayStatus, string> = {
-  operational: "bg-emerald-500",
-  degraded: "bg-amber-500",
-  down: "bg-red-500",
 };
 
 /** 中转站列表行：重点突出免费额度与说明 */
@@ -37,21 +31,12 @@ function RelayRow({ relay }: { relay: Relay }) {
       <div className="flex min-w-0 items-center gap-3">
         <RelayLogo id={relay.id} name={relay.name} size={40} logo={relay.logo} />
         <div className="min-w-0">
-          <div className="flex items-center gap-1.5">
-            <Link
-              href={`/relay/${relay.id}`}
-              className="truncate font-semibold hover:underline"
-            >
-              {relay.name}
-            </Link>
-            <span
-              className={`inline-block h-2 w-2 shrink-0 rounded-full ${STATUS_DOT[relay.status]}`}
-              title={t(`status.${relay.status}` as DictKey)}
-            />
-          </div>
-          <div className="truncate text-xs text-muted-foreground">
-            {relay.url.replace(/^https?:\/\//, "")}
-          </div>
+          <Link
+            href={`/relay/${relay.id}`}
+            className="truncate font-semibold hover:underline"
+          >
+            {relay.name}
+          </Link>
         </div>
       </div>
 
