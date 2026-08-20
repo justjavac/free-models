@@ -35,7 +35,7 @@ function RelayRow({ relay }: { relay: Relay }) {
     <li className="grid grid-cols-1 gap-3 px-4 py-3 transition-colors hover:bg-accent/40 md:grid-cols-[1.1fr_1.4fr_1.6fr_0.9fr_0.55fr_0.9fr] md:items-center md:gap-4">
       {/* 中转站：logo + 名字 */}
       <div className="flex min-w-0 items-center gap-3">
-        <RelayLogo id={relay.id} name={relay.name} size={40} />
+        <RelayLogo id={relay.id} name={relay.name} size={40} logo={relay.logo} />
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">
             <Link

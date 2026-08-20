@@ -168,7 +168,7 @@ export function ModelDetail({ model, catalog }: { model: Model; catalog: Catalog
                     href={`/relay/${r.id}`}
                     className="group flex items-center gap-3 rounded-xl border border-border bg-card/50 p-3 transition-colors hover:border-foreground/30"
                   >
-                    <RelayLogo id={r.id} name={r.name} size={36} />
+                    <RelayLogo id={r.id} name={r.name} size={36} logo={r.logo} />
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center gap-1.5 truncate font-medium text-foreground">
                         {r.name}

@@ -65,7 +65,7 @@ export interface Relay {
   region: Region[];
   status: RelayStatus;
   doc?: string;
-  logo?: string; // /logos/<id>.svg
+  logo?: string; // logo 图片 URL（如 https://anyrouter.top/logo.png），无则用内联标识
   updated_at: string; // ISO 日期
   models: Record<string, ModelRef>;
 }

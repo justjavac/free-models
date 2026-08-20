@@ -1,7 +1,10 @@
-// 品牌 logo（内联 SVG，零外部依赖）。
+// 品牌 logo（内联 SVG，零外部依赖；也支持中转站提供真实 logo 图片，加载失败回退内联标识）。
 // 中转站/厂商无真实 logo 资产时，用品牌色渐变 + 缩写/首字母生成统一风格的标识，
 // 视觉接近 models.dev 的纯色 logo 风格；不依赖 public 文件（免疫外部删除）。
 
+"use client";
+
+import { useState } from "react";
 import { hashHue, initial } from "@/lib/visual";
 
 // 站点 Logo：路由/中转标记（两个输入节点汇向一个输出节点），
@@ -129,18 +132,39 @@ export function ProviderLogo({
   );
 }
 
-/** 中转站 logo（无品牌色表时按 id 色相生成） */
+/** 中转站 logo：优先真实图片（relay.logo），加载失败回退内联标识 */
 export function RelayLogo({
   id,
   name,
   size = 40,
   className,
+  logo,
 }: {
   id: string;
   name: string;
   size?: number;
   className?: string;
+  logo?: string;
 }) {
+  const [failed, setFailed] = useState(false);
+
+  if (logo && !failed) {
+    return (
+      // 外部 logo 需 onError 回退内联标识，用原生 img（禁用 next/image 提示）
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={logo}
+        alt={name}
+        width={size}
+        height={size}
+        loading="lazy"
+        onError={() => setFailed(true)}
+        className={className}
+        style={{ flexShrink: 0, objectFit: "contain", borderRadius: size * 0.25 }}
+      />
+    );
+  }
+
   return (
     <LogoBox
       id={id}

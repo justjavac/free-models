@@ -41,7 +41,7 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
 
       {/* 头部：logo + 名称 + id + 状态（对齐 models.dev） */}
       <header className="flex flex-wrap items-start gap-4">
-        <RelayLogo id={relay.id} name={relay.name} size={56} />
+        <RelayLogo id={relay.id} name={relay.name} size={56} logo={relay.logo} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-bold tracking-tight">{relay.name}</h1>
