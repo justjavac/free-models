@@ -11,7 +11,7 @@ const m = (id: string, name: string, extra?: Partial<ModelRef>): ModelRef => ({
 });
 
 export const relays: Relay[] = [
-  // 1) AnyRouter —— 你点名的中转站
+  // 1) AnyRouter
   {
     id: "anyrouter",
     name: "AnyRouter",
@@ -60,7 +60,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 2) AgentRouter —— 你点名的中转站
+  // 2) AgentRouter
   {
     id: "agentrouter",
     name: "AgentRouter",
@@ -104,43 +104,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 3) OpenRouter
-  {
-    id: "openrouter",
-    name: "OpenRouter",
-    url: "https://openrouter.ai",
-    api: "https://openrouter.ai/api/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["OPENROUTER_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["OPENROUTER_API_KEY"], signup: "https://openrouter.ai/signup" },
-    free_quota: {
-      available: true,
-      type: "free_models",
-      amount: "部分开源模型永久免费（如 meta-llama/*、deepseek 等）",
-      notes: "免费模型列表随平台调整，详见官网。",
-    },
-    pricing: { model: "markup", notes: "在厂商价基础上少量加成。" },
-    features: ["openai_compatible", "huge_catalog"],
-    providers: ["openai", "anthropic", "google", "deepseek", "qwen", "meta", "mistral", "xai", "zhipu"],
-    model_count: 0,
-    region: ["global"],
-    status: "operational",
-    doc: "https://openrouter.ai/docs",
-    updated_at: "2026-08-19",
-    models: {
-      "openai/gpt-4o": m("openai/gpt-4o", "GPT-4o"),
-      "anthropic/claude-sonnet-4": m("anthropic/claude-sonnet-4", "Claude Sonnet 4"),
-      "google/gemini-2.5-flash": m("google/gemini-2.5-flash", "Gemini 2.5 Flash"),
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "meta/llama-3.1-70b": m("meta/llama-3.1-70b", "Llama 3.1 70B"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-      "mistral/mistral-large": m("mistral/mistral-large", "Mistral Large"),
-      "xai/grok-2": m("xai/grok-2", "Grok 2"),
-    },
-  },
-
-  // 4) 硅基流动 SiliconFlow
+  // 3) 硅基流动 SiliconFlow
   {
     id: "siliconflow",
     name: "硅基流动 SiliconFlow",
@@ -149,7 +113,7 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["SILICONFLOW_API_KEY"],
     openai_compatible: true,
-    auth: { type: "api_key", env: ["SILICONFLOW_API_KEY"], signup: "https://cloud.siliconflow.cn" },
+    auth: { type: "api_key", env: ["SILICONFLOW_API_KEY"], signup: "https://cloud.siliconflow.cn/i/1jkLcMoK" },
     free_quota: {
       available: true,
       type: "credit",
@@ -164,7 +128,7 @@ export const relays: Relay[] = [
     region: ["cn", "global"],
     status: "operational",
     doc: "https://docs.siliconflow.cn",
-    updated_at: "2026-08-19",
+    updated_at: "2026-08-20",
     models: {
       "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
       "deepseek/deepseek-reasoner": m("deepseek/deepseek-reasoner", "DeepSeek Reasoner"),
@@ -178,22 +142,22 @@ export const relays: Relay[] = [
     },
   },
 
-  // 5) PPIO
+  // 4) PPIO 派欧云
   {
     id: "ppio",
     name: "PPIO 派欧云",
-    url: "https://ppio.cn",
-    api: "https://api.ppio.cn/v1",
+    url: "https://ppio.com",
+    api: "https://api.ppio.com/v1",
     npm: "@ai-sdk/openai-compatible",
     env: ["PPIO_API_KEY"],
     openai_compatible: true,
-    auth: { type: "api_key", env: ["PPIO_API_KEY"], signup: "https://ppio.cn" },
+    auth: { type: "api_key", env: ["PPIO_API_KEY"], signup: "https://ppio.com/user/register?invited_by=6F996D" },
     free_quota: {
       available: true,
       type: "credit",
-      amount: "新用户赠送试用额度（需核实具体数额）",
-      amount_usd: 1,
-      notes: "免费额度具体数额需核实。",
+      amount: "实名注册送 2 元 / 新用户送 15 元",
+      amount_usd: 2,
+      notes: "实名认证后赠送 2 元，新用户注册送 15 元。",
     },
     pricing: { model: "retail" },
     features: ["openai_compatible", "cn_region"],
@@ -201,7 +165,7 @@ export const relays: Relay[] = [
     model_count: 0,
     region: ["cn", "global"],
     status: "operational",
-    updated_at: "2026-08-19",
+    updated_at: "2026-08-20",
     models: {
       "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
       "deepseek/deepseek-reasoner": m("deepseek/deepseek-reasoner", "DeepSeek Reasoner"),
@@ -211,7 +175,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 6) 唯一AI
+  // 5) 唯一AI
   {
     id: "aiionly",
     name: "唯一AI",
@@ -234,7 +198,7 @@ export const relays: Relay[] = [
     model_count: 0,
     region: ["cn", "global"],
     status: "operational",
-    updated_at: "2026-08-19",
+    updated_at: "2026-08-20",
     models: {
       "openai/gpt-4o": m("openai/gpt-4o", "GPT-4o"),
       "anthropic/claude-sonnet-4": m("anthropic/claude-sonnet-4", "Claude Sonnet 4"),
@@ -244,38 +208,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 7) 心流AI 开放平台
-  {
-    id: "iflow",
-    name: "心流AI 开放平台",
-    url: "https://platform.iflow.cn",
-    api: "https://platform.iflow.cn/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["IFLOW_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["IFLOW_API_KEY"], signup: "https://platform.iflow.cn" },
-    free_quota: {
-      available: true,
-      type: "free_models",
-      amount: "每日 2000 次免费调用",
-      notes: "用 AI 重塑研发范式。",
-    },
-    pricing: { model: "retail" },
-    features: ["openai_compatible", "cn_region", "daily_free_calls"],
-    providers: ["deepseek", "qwen", "zhipu", "openai", "anthropic"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-19",
-    models: {
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-      "zhipu/glm-4-plus": m("zhipu/glm-4-plus", "GLM-4 Plus"),
-      "openai/gpt-4o-mini": m("openai/gpt-4o-mini", "GPT-4o mini"),
-    },
-  },
-
-  // 8) 魔塔社区 ModelScope
+  // 6) 魔塔社区 ModelScope
   {
     id: "modelscope",
     name: "魔塔社区 ModelScope",
@@ -284,20 +217,24 @@ export const relays: Relay[] = [
     npm: "@ai-sdk/openai-compatible",
     env: ["MODELSCOPE_API_KEY"],
     openai_compatible: true,
-    auth: { type: "api_key", env: ["MODELSCOPE_API_KEY"], signup: "https://modelscope.cn" },
+    auth: {
+      type: "api_key",
+      env: ["MODELSCOPE_API_KEY"],
+      signup: "https://modelscope.cn/register?inviteCode=justjavac&invitorName=justjavac",
+    },
     free_quota: {
       available: true,
-      type: "free_models",
-      amount: "每日 2000 次免费调用",
-      notes: "中国最大 AI 大模型开源社区。",
+      type: "credit",
+      amount: "注册和每日登录送 200 积分",
+      notes: "做社区任务可以获得更多积分。",
     },
     pricing: { model: "free" },
-    features: ["openai_compatible", "cn_region", "daily_free_calls"],
+    features: ["openai_compatible", "cn_region"],
     providers: ["deepseek", "qwen", "llama", "glm"],
     model_count: 0,
     region: ["cn", "global"],
     status: "operational",
-    updated_at: "2026-08-19",
+    updated_at: "2026-08-20",
     models: {
       "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
       "qwen/qwen2.5-72b-instruct": m("qwen/qwen2.5-72b-instruct", "Qwen2.5-72B"),
@@ -307,7 +244,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 9) 小米 Mimo
+  // 7) 小米 Mimo
   {
     id: "xiaomi-mimo",
     name: "小米 Mimo 开放平台",
@@ -329,14 +266,14 @@ export const relays: Relay[] = [
     model_count: 0,
     region: ["cn", "global"],
     status: "operational",
-    updated_at: "2026-08-19",
+    updated_at: "2026-08-20",
     models: {
       "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
       "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
     },
   },
 
-  // 10) NVIDIA MIM
+  // 8) NVIDIA MIM
   {
     id: "nvidia-mim",
     name: "NVIDIA MIM (build.nvidia.com)",
@@ -358,7 +295,7 @@ export const relays: Relay[] = [
     model_count: 0,
     region: ["global"],
     status: "operational",
-    updated_at: "2026-08-19",
+    updated_at: "2026-08-20",
     models: {
       "zhipu/glm-4-plus": m("zhipu/glm-4-plus", "GLM-4 Plus"),
       "minimax/abab6.5": m("minimax/abab6.5", "MiniMax ABAB6.5"),
@@ -367,163 +304,7 @@ export const relays: Relay[] = [
     },
   },
 
-  // 11) 302.AI
-  {
-    id: "302ai",
-    name: "302.AI",
-    url: "https://302.ai",
-    api: "https://api.302.ai/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["AI302_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["AI302_API_KEY"], signup: "https://302.ai" },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "注册赠送试用额度（需核实具体数额）",
-      amount_usd: 1,
-      notes: "聚合多模型，含图像/视频等；免费额度需核实。",
-    },
-    pricing: { model: "retail" },
-    features: ["openai_compatible", "cn_region", "multimodal"],
-    providers: ["openai", "anthropic", "google", "deepseek", "qwen", "meta"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-19",
-    models: {
-      "openai/gpt-4o": m("openai/gpt-4o", "GPT-4o"),
-      "anthropic/claude-sonnet-4": m("anthropic/claude-sonnet-4", "Claude Sonnet 4"),
-      "google/gemini-2.5-flash": m("google/gemini-2.5-flash", "Gemini 2.5 Flash"),
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-    },
-  },
-
-  // 12) Requesty
-  {
-    id: "requesty",
-    name: "Requesty",
-    url: "https://requesty.ai",
-    api: "https://router.requesty.ai/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["REQUESTY_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["REQUESTY_API_KEY"], signup: "https://requesty.ai" },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "新用户免费额度（需核实具体数额）",
-      amount_usd: 1,
-      notes: "含路由/回退与评测；免费额度需核实。",
-    },
-    pricing: { model: "markup" },
-    features: ["openai_compatible", "routing", "fallback"],
-    providers: ["openai", "anthropic", "google", "deepseek", "meta"],
-    model_count: 0,
-    region: ["global"],
-    status: "operational",
-    updated_at: "2026-08-19",
-    models: {
-      "openai/gpt-4o": m("openai/gpt-4o", "GPT-4o"),
-      "anthropic/claude-sonnet-4": m("anthropic/claude-sonnet-4", "Claude Sonnet 4"),
-      "google/gemini-2.5-pro": m("google/gemini-2.5-pro", "Gemini 2.5 Pro"),
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-    },
-  },
-
-  // 13) AiProxy
-  {
-    id: "aiproxy",
-    name: "AiProxy",
-    url: "https://aiproxy.com",
-    api: "https://api.aiproxy.com/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["AIPROXY_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["AIPROXY_API_KEY"], signup: "https://aiproxy.com" },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "免费试用额度（需核实具体数额）",
-      amount_usd: 1,
-      notes: "聚合网关；免费额度需核实。",
-    },
-    pricing: { model: "retail" },
-    features: ["openai_compatible", "cn_region"],
-    providers: ["openai", "anthropic", "deepseek", "qwen", "google"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-19",
-    models: {
-      "openai/gpt-4o": m("openai/gpt-4o", "GPT-4o"),
-      "anthropic/claude-sonnet-4": m("anthropic/claude-sonnet-4", "Claude Sonnet 4"),
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-    },
-  },
-
-  // 14) 腾讯混元 Hunyuan
-  {
-    id: "hunyuan",
-    name: "腾讯混元 Hunyuan",
-    url: "https://cloud.tencent.com/product/hunyuan",
-    api: "https://api.hunyuan.cloud.tencent.com/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["HUNYUAN_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["HUNYUAN_API_KEY"], signup: "https://cloud.tencent.com" },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "腾讯云新用户免费额度（需实名）",
-      amount_usd: 1,
-      notes: "腾讯云大模型知识引擎，含免费资源包。",
-    },
-    pricing: { model: "retail" },
-    features: ["openai_compatible", "cn_region"],
-    providers: ["tencent", "deepseek", "qwen"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-19",
-    models: {
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-    },
-  },
-
-  // 15) 火山方舟 Volcengine (豆包)
-  {
-    id: "volcengine",
-    name: "火山方舟 Volcengine",
-    url: "https://www.volcengine.com/product/ark",
-    api: "https://ark.cn-beijing.volces.com/api/v3",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["ARK_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["ARK_API_KEY"], signup: "https://www.volcengine.com" },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "火山方舟新手免费额度",
-      amount_usd: 1,
-      notes: "豆包大模型平台，含免费试用额度。",
-    },
-    pricing: { model: "retail" },
-    features: ["openai_compatible", "cn_region"],
-    providers: ["volcengine", "deepseek", "qwen"],
-    model_count: 0,
-    region: ["cn", "global"],
-    status: "operational",
-    updated_at: "2026-08-19",
-    models: {
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "qwen/qwen-max": m("qwen/qwen-max", "Qwen Max"),
-    },
-  },
-  // 16) Groq —— 免费层（部分开源模型不限量）
+  // 9) Groq —— 免费层（部分开源模型不限量）
   {
     id: "groq",
     name: "Groq",
@@ -552,39 +333,8 @@ export const relays: Relay[] = [
       "mistral/mistral-large": m("mistral/mistral-large", "Mistral Large"),
     },
   },
-  // 17) Together AI —— 新用户 $1 免费额度
-  {
-    id: "together",
-    name: "Together AI",
-    url: "https://www.together.ai",
-    api: "https://api.together.xyz/v1",
-    npm: "@ai-sdk/openai-compatible",
-    env: ["TOGETHER_API_KEY"],
-    openai_compatible: true,
-    auth: { type: "api_key", env: ["TOGETHER_API_KEY"], signup: "https://api.together.ai/signin" },
-    free_quota: {
-      available: true,
-      type: "credit",
-      amount: "新用户 $1 免费额度",
-      amount_usd: 1,
-      notes: "开源模型托管平台，注册即赠额度，可按量调用开源模型。",
-    },
-    pricing: { model: "retail" },
-    features: ["openai_compatible"],
-    providers: ["meta", "qwen", "deepseek", "mistral"],
-    model_count: 0,
-    region: ["global"],
-    status: "operational",
-    updated_at: "2026-08-20",
-    models: {
-      "meta/llama-3.1-70b": m("meta/llama-3.1-70b", "Llama 3.1 70B"),
-      "meta/llama-3.1-8b": m("meta/llama-3.1-8b", "Llama 3.1 8B"),
-      "qwen/qwen2.5-72b-instruct": m("qwen/qwen2.5-72b-instruct", "Qwen2.5-72B Instruct"),
-      "deepseek/deepseek-chat": m("deepseek/deepseek-chat", "DeepSeek Chat"),
-      "mistral/mistral-large": m("mistral/mistral-large", "Mistral Large"),
-    },
-  },
-  // 18) Cloudflare Workers AI —— 每日免费推理额度
+
+  // 10) Cloudflare Workers AI —— 每日免费推理额度
   {
     id: "cloudflare-ai",
     name: "Cloudflare Workers AI",
@@ -611,5 +361,99 @@ export const relays: Relay[] = [
       "meta/llama-3.1-8b": m("meta/llama-3.1-8b", "Llama 3.1 8B"),
       "qwen/qwen2.5-72b-instruct": m("qwen/qwen2.5-72b-instruct", "Qwen2.5-72B Instruct"),
     },
+  },
+
+  // 11) TraeWork AI —— AI 编程工作台（邀请制，需核实额度）
+  {
+    id: "traework",
+    name: "TraeWork AI",
+    url: "https://www.trae.cn",
+    api: "https://www.trae.cn",
+    npm: "@ai-sdk/openai-compatible",
+    env: ["TRAEWORK_API_KEY"],
+    openai_compatible: true,
+    auth: {
+      type: "api_key",
+      env: ["TRAEWORK_API_KEY"],
+      signup:
+        "https://www.trae.cn/work-fission/WM6XUZKT444K?utm_source=copy_link&utm_medium=friends_invite",
+    },
+    free_quota: {
+      available: true,
+      type: "credit",
+      amount: "邀请注册送额度（需核实具体数额）",
+      amount_usd: 1,
+      notes: "AI 编程工作台；邀请链接注册，免费额度以官方为准。",
+    },
+    pricing: { model: "retail" },
+    features: ["ai_coding"],
+    providers: ["deepseek", "qwen", "openai"],
+    model_count: 0,
+    region: ["cn", "global"],
+    status: "operational",
+    updated_at: "2026-08-20",
+    models: {},
+  },
+
+  // 12) WorkBuddy —— AI 助手（邀请制，需核实额度）
+  {
+    id: "workbuddy",
+    name: "WorkBuddy",
+    url: "https://www.workbuddy.cn",
+    api: "https://www.workbuddy.cn",
+    npm: "@ai-sdk/openai-compatible",
+    env: ["WORKBUDDY_API_KEY"],
+    openai_compatible: true,
+    auth: {
+      type: "api_key",
+      env: ["WORKBUDDY_API_KEY"],
+      signup: "https://www.workbuddy.cn/events/invite?inviteCode=yv0o6ubp3mqg",
+    },
+    free_quota: {
+      available: true,
+      type: "credit",
+      amount: "邀请注册送额度（需核实具体数额）",
+      amount_usd: 1,
+      notes: "AI 智能助手；邀请码注册，免费额度以官方为准。",
+    },
+    pricing: { model: "retail" },
+    features: ["ai_assistant"],
+    providers: ["deepseek", "qwen", "openai"],
+    model_count: 0,
+    region: ["cn", "global"],
+    status: "operational",
+    updated_at: "2026-08-20",
+    models: {},
+  },
+
+  // 13) OpenCode —— 开源 AI 编码工具（需核实额度）
+  {
+    id: "opencode",
+    name: "OpenCode",
+    url: "https://opencode.ai",
+    api: "https://opencode.ai",
+    npm: "@ai-sdk/openai-compatible",
+    env: ["OPENCODE_API_KEY"],
+    openai_compatible: true,
+    auth: {
+      type: "api_key",
+      env: ["OPENCODE_API_KEY"],
+      signup: "https://opencode.ai",
+    },
+    free_quota: {
+      available: true,
+      type: "credit",
+      amount: "免费额度（需核实具体数额）",
+      amount_usd: 1,
+      notes: "开源 AI 编码工具；免费额度以官方为准。",
+    },
+    pricing: { model: "retail" },
+    features: ["open_source", "ai_coding"],
+    providers: ["openai", "anthropic", "deepseek"],
+    model_count: 0,
+    region: ["global"],
+    status: "operational",
+    updated_at: "2026-08-20",
+    models: {},
   },
 ];
