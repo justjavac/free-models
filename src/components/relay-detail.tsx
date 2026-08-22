@@ -119,18 +119,18 @@ export function RelayDetail({ relay, catalog }: { relay: Relay; catalog: Catalog
         </h2>
         <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full min-w-[640px] text-sm">
               <thead className="sticky top-0 z-10 bg-muted/80 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground backdrop-blur">
                 <tr>
-                  <th scope="col" className="px-4 py-3">{t("detail.modelName")}</th>
-                  <th scope="col" className="px-4 py-3">ID</th>
-                  <th scope="col" className="px-4 py-3">{t("models.context")}</th>
-                  <th scope="col" className="px-4 py-3">{t("models.maxOutput")}</th>
-                  <th scope="col" className="px-4 py-3">{t("detail.price")}</th>
-                  <th scope="col" className="px-4 py-3">{t("models.reasoning")}</th>
-                  <th scope="col" className="px-4 py-3">{t("models.toolCall")}</th>
-                  <th scope="col" className="px-4 py-3">{t("models.structured")}</th>
-                  <th scope="col" className="px-4 py-3">{t("detail.availableOn")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("detail.modelName")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">ID</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("models.context")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("models.maxOutput")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("detail.price")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("models.reasoning")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("models.toolCall")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("models.structured")}</th>
+              <th scope="col" className="px-3 py-2 sm:px-4 sm:py-3">{t("detail.availableOn")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -160,7 +160,7 @@ function ModelRow({
   const price = refModel.cost ?? model?.price;
   return (
     <tr className="transition-colors hover:bg-accent/40">
-      <td className="px-4 py-2.5">
+      <td className="px-3 py-2 sm:px-4 sm:py-2.5">
         <Link
           href={`/models/${id}`}
           className="font-medium text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -171,24 +171,24 @@ function ModelRow({
       <td className="px-4 py-2.5 font-mono text-xs text-muted-foreground">{id}</td>
       <td className="px-4 py-2.5 text-muted-foreground">{formatTokens(model?.context)}</td>
       <td className="px-4 py-2.5 text-muted-foreground">{formatTokens(model?.max_output)}</td>
-      <td className="px-4 py-2.5 text-muted-foreground">
+      <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">
         {price ? `$${price.input?.toFixed(2)} / $${price.output?.toFixed(2)}` : "—"}
       </td>
-      <td className="px-4 py-2.5">
+      <td className="px-3 py-2 sm:px-4 sm:py-2.5">
         {model?.reasoning ? (
           <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-500" />
         ) : (
           <Minus className="h-4 w-4 text-muted-foreground/40" />
         )}
       </td>
-      <td className="px-4 py-2.5">
+      <td className="px-3 py-2 sm:px-4 sm:py-2.5">
         {model?.tool_call ? (
           <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-500" />
         ) : (
           <Minus className="h-4 w-4 text-muted-foreground/40" />
         )}
       </td>
-      <td className="px-4 py-2.5">
+      <td className="px-3 py-2 sm:px-4 sm:py-2.5">
         {model?.structured_output ? (
           <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-500" />
         ) : (
