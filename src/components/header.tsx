@@ -166,6 +166,16 @@ export function Header() {
                 </Link>
               ))}
             </nav>
+
+            <div className="flex flex-col gap-2 border-t border-border/70 pt-3">
+              <Button asChild variant="outline" className="w-full justify-start">
+                <a href={REPO_URL} target="_blank" rel="noreferrer">
+                  <GithubIcon className="h-4 w-4" />
+                  {t("nav.source")}
+                </a>
+              </Button>
+              <SubmitRelayButton className="w-full justify-start" />
+            </div>
           </div>
         </div>
       )}
