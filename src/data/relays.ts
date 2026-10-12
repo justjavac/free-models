@@ -170,7 +170,7 @@ export const relays: Relay[] = [
       type: "api_key",
       env: ["TRAEWORK_API_KEY"],
       signup:
-        "https://www.trae.cn/work-fission/WM6XUZKT444K?utm_source=copy_link&utm_medium=friends_invite",
+        "https://www.trae.cn/events/code-fission/6EH5DQ3Z343M?utm_source=copy_link&utm_medium=code_fission",
     },
     free_quota: {
       available: true,
